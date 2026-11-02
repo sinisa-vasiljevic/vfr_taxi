@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore { match /databases/{database}/documents {
+  function signedIn() { return request.auth != null; }
+  function master() { return signedIn() && request.auth.token.email == "DEINE-MASTER-EMAIL@BEISPIEL.DE"; }
+  function role() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role; }
+  function admin() { return master() || role() == 'admin'; }
+  match /users/{uid} {
+    allow read: if signedIn();
+    allow create: if signedIn() && request.auth.uid == uid && request.resource.data.role in ['user','master'];
+    allow update: if master() || (request.auth.uid == uid && request.resource.data.role == resource.data.role);
+    allow delete: if master() && uid != request.auth.uid;
+  }
+  match /vehicles/{id} { allow read: if signedIn(); allow create: if admin(); allow update: if signedIn(); allow delete: if master(); }
+  match /bookings/{id} {
+    allow read: if signedIn();
+    allow create: if signedIn() && (request.resource.data.status == 'requested' || admin());
+    allow update: if admin() || (signedIn() && resource.data.trainerUid == request.auth.uid && resource.data.status == 'requested');
+    allow delete: if admin() || (signedIn() && resource.data.trainerUid == request.auth.uid && resource.data.status == 'requested');
+  }
+  match /trips/{id} { allow read, create: if signedIn(); allow update, delete: if admin(); }
+  match /damages/{id} { allow read, create: if signedIn(); allow update: if admin(); allow delete: if master(); }
+}}

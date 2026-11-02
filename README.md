@@ -1,20 +1,32 @@
-# VfR Taxi PWA 1.1.0
+# VfR Taxi PWA v1.2.0
 
-Vollständiger Stand mit Einladungssystem und Benutzerverwaltung.
+Vollständiger Stand nach dem bewährten Trainingsplaner-Aufbau.
 
-## In Firebase noch ausführen
-1. Den kompletten Inhalt aus `firestore.rules` in Firestore > Regeln einsetzen und veröffentlichen.
-2. Authentication > Einstellungen > Autorisierte Domains: die GitHub-Pages-Domain hinzufügen.
-3. Die Dateien dieses Ordners vollständig in das GitHub-Repository hochladen.
-4. Als Master in der App mit `v.sinisa@gmx.de` über „Mit Einladung registrieren“ registrieren. Für diese E-Mail ist kein Einladungscode nötig.
-5. Danach im Reiter „Benutzer“ Einladungen für Trainer anlegen.
+## Registrierung und Benutzerverwaltung
+- Master-E-Mail: `v.sinisa@gmx.de`
+- Master legt in der App Einladungen mit Name und E-Mail an.
+- Einladung enthält `active: true` und `used: false`.
+- Erstzugang erfolgt mit Einladungscode, passender E-Mail und eigenem Passwort.
+- Nach Firebase Authentication werden `users/{uid}` und der Verbrauch der Einladung in einem gemeinsamen Firestore-Batch geschrieben.
+- Die Regeln validieren den gemeinsamen Endzustand mit `getAfter()`.
+- Bei Fehlschlag entfernt die App das zuvor erzeugte Authentication-Konto wieder.
+- Master kann registrierte Trainer zu Admins machen und Adminrechte entziehen.
+- Mehrere Admins sind möglich; nur der Master verwaltet Rollen.
 
-## Einladungsablauf
-- Der Master legt Name und E-Mail an; die App erzeugt einen Einladungscode.
-- Die eingeladene Person registriert sich mit exakt dieser E-Mail und dem Code.
-- Erst dann entstehen Authentication-Konto und `users/{uid}`.
-- Ungültige Registrierungskonten werden sofort wieder entfernt.
-- Nur der Master kann Benutzer zu Admins machen oder Adminrechte entziehen.
+## Veröffentlichung
+1. Den gesamten Inhalt dieses Ordners ins GitHub-Repository laden.
+2. In Firebase unter Firestore Database > Regeln den vollständigen Inhalt von `firestore.rules` einsetzen und veröffentlichen.
+3. In Firebase Authentication unter autorisierte Domains die GitHub-Pages-Domain hinterlegen.
+4. Auf der Anmeldeseite „Mit Einladung registrieren“ wählen und den Master mit `v.sinisa@gmx.de` anlegen; der Master benötigt keinen Einladungscode.
+5. Danach im Reiter „Benutzer“ Trainer-Einladungen erstellen.
 
-## Enthalten
-Fahrzeuge, Kennzeichen, Belegung, Anfragen, Reservierung durch Admins, Fahrtdokumentation, Schäden, TÜV-Warnstufen, Werkstattsperren, Rollen und PWA-Icons.
+## Enthaltene Fachfunktionen
+- Vier Busse mit Kennzeichen
+- Statusfarben: frei grün, angefragt gelb, reserviert rot, Werkstatt/gesperrt schwarz
+- Alle Benutzer sehen alle Anfragen und Reservierungen inklusive Trainer
+- Verbindliche Zuweisung nur durch Admin/Master
+- Fahrtdokumentation: KM Abfahrt/Ankunft, getankt, geputzt, gewaschen
+- Schäden/Mängel als Freitext
+- TÜV-Warnung: 8 Wochen gelb, 4 Wochen rot, abgelaufen rotes Kreuz
+- Werkstattaufenthalte und Sperrzeiten
+- PWA-Service-Worker und bestätigtes Homescreen-Icon

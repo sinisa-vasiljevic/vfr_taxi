@@ -1,4 +1,4 @@
-# VfR Taxi PWA v1.3.0
+# VfR Taxi PWA v1.3.1
 
 Vollständiger Stand nach dem bewährten Trainingsplaner-Aufbau.
 
@@ -32,21 +32,28 @@ Vollständiger Stand nach dem bewährten Trainingsplaner-Aufbau.
 - PWA-Service-Worker und bestätigtes Homescreen-Icon
 
 
-## Korrektur v1.3.0
+## Korrektur v1.3.1
 Firebase Web API-Key exakt aus der Firebase-Konsole übernommen.
 
 
-## Fehlerkorrektur v1.3.0
+## Fehlerkorrektur v1.3.1
 - Firebase-Konfiguration Zeichen für Zeichen aus dem bereitgestellten Projektblock übernommen.
 - `app.js` und `config.js` erhalten Versionsparameter.
 - Service Worker cached ausführbare JavaScript- und Konfigurationsdateien nicht mehr.
 - Dadurch kann eine installierte PWA nicht länger eine ältere Firebase-Konfiguration aus einem vorherigen Cache verwenden.
 
 
-## Korrekturen v1.3.0
+## Korrekturen v1.3.1
 - Anmeldefenster wird nach erfolgreicher Anmeldung zuverlässig ausgeblendet (`[hidden]`).
 - Master-Selbstregistrierung entfernt; vorhandener Master nutzt ausschließlich „Anmelden“.
 - Monatsansicht als Standardansicht eingebaut.
 - Direkter Sprung zu jedem Monat über Monatsauswahl.
 - Umschaltung Monat/Woche und Heute-Schaltfläche.
 - Tagesdetails mit Bus, Mannschaft, Trainer, Zeit, Status und Zweck.
+
+
+### Layoutkorrektur v1.3.1
+- Mobile Schrift- und Bausteingroessen fest begrenzt.
+- Vier Hauptreiter auf vier gleich breite Spalten gesetzt.
+- Ueberlaufen bei Navigation, Benutzerverwaltung und Aktionsbuttons verhindert.
+- Fahrzeugkarten und Kalendersteuerung kompakter.

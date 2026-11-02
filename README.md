@@ -1,4 +1,4 @@
-# VfR Taxi PWA v1.2.1
+# VfR Taxi PWA v1.2.2
 
 Vollständiger Stand nach dem bewährten Trainingsplaner-Aufbau.
 
@@ -32,5 +32,12 @@ Vollständiger Stand nach dem bewährten Trainingsplaner-Aufbau.
 - PWA-Service-Worker und bestätigtes Homescreen-Icon
 
 
-## Korrektur v1.2.1
+## Korrektur v1.2.2
 Firebase Web API-Key exakt aus der Firebase-Konsole übernommen.
+
+
+## Fehlerkorrektur v1.2.2
+- Firebase-Konfiguration Zeichen für Zeichen aus dem bereitgestellten Projektblock übernommen.
+- `app.js` und `config.js` erhalten Versionsparameter.
+- Service Worker cached ausführbare JavaScript- und Konfigurationsdateien nicht mehr.
+- Dadurch kann eine installierte PWA nicht länger eine ältere Firebase-Konfiguration aus einem vorherigen Cache verwenden.

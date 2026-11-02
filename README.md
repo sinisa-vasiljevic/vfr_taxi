@@ -1,4 +1,4 @@
-# VfR Taxi PWA v1.2.0
+# VfR Taxi PWA v1.2.1
 
 Vollständiger Stand nach dem bewährten Trainingsplaner-Aufbau.
 
@@ -30,3 +30,7 @@ Vollständiger Stand nach dem bewährten Trainingsplaner-Aufbau.
 - TÜV-Warnung: 8 Wochen gelb, 4 Wochen rot, abgelaufen rotes Kreuz
 - Werkstattaufenthalte und Sperrzeiten
 - PWA-Service-Worker und bestätigtes Homescreen-Icon
+
+
+## Korrektur v1.2.1
+Firebase Web API-Key exakt aus der Firebase-Konsole übernommen.

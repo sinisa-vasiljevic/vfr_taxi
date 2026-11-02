@@ -58,8 +58,7 @@ Firebase Web API-Key exakt aus der Firebase-Konsole übernommen.
 - Getankt, Geputzt und Gewaschen kompakter und gleich gross.
 
 
-### v1.3.3
-- Fahrzeugdialog kompakter.
-- TÜV sowie Werkstatt Von/Bis als kompakte Datumsfelder.
-- Getankt/Geputzt/Gewaschen weiter verkleinert.
-- Sichtbare Fahrzeughistorie mit Fahrtdokumentationen und Schäden.
+### v1.3.4
+- Gegenueber v1.3.2 nur TÜV, Werkstatt Von und Bis schmaler.
+- Kein Redesign des Fahrzeugdialogs.
+- Fzg.-Historie pro Bus sichtbar, gespeist aus trips und damages.

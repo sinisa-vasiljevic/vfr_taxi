@@ -12,8 +12,8 @@ nav button{min-width:0;width:100%;padding:0 4px;font-size:clamp(12px,3.35vw,15px
 @media(max-width:700px){nav{height:56px}nav button{font-size:13px}.user-heading-row{grid-template-columns:1fr}.user-heading-row .primary{width:100%;height:42px}.toggles{gap:5px}.toggle{height:38px;font-size:12px}}
 @media(max-width:390px){nav button{font-size:12px;padding:0 2px}.toggle{font-size:11px;padding:0 2px}}
 
-/* v1.3.3 vehicle modal + history */
-dialog{width:min(520px,calc(100% - 24px));max-height:82dvh;padding:16px;overflow-y:auto;overflow-x:hidden}
-dialog h2{font-size:22px;margin:4px 0 12px}.formGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.formGrid label{min-width:0}.formGrid input{height:42px;padding:7px 9px}.compactDate{max-width:185px;height:40px!important;padding:5px 7px!important;font-size:14px!important}.toggles{max-width:100%;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.toggle{height:36px!important;font-size:12px!important;padding:0 3px!important}.historyBtn{width:100%;height:32px;border:0;border-radius:8px;background:#111;color:#fff;font-size:12px;font-weight:900;margin-top:6px}.historyPanel h3{margin:16px 0 8px}.historyItem{display:grid;gap:3px;padding:10px;margin:7px 0;background:#f3f4f5;border-radius:10px;font-size:13px}.historyItem span{overflow-wrap:anywhere}.damageText{color:#a00000;font-weight:800}
-@media(max-width:700px){dialog{width:calc(100% - 28px);max-height:76dvh;padding:13px;border-radius:16px}.formGrid{grid-template-columns:1fr 1fr;gap:7px}.formGrid label{font-size:10px;margin:5px 0}.formGrid input{height:38px;font-size:13px;margin-top:2px}.compactDate{width:100%;max-width:150px;height:36px!important;font-size:12px!important}.toggles{gap:4px}.toggle{height:34px!important;font-size:11px!important}textarea{min-height:70px}dialog h3{font-size:18px;margin:12px 0 6px}}
-@media(max-width:390px){.compactDate{max-width:138px}.toggle{font-size:10px!important}}
+/* v1.3.4: bewusst nur die drei Datumsfelder schmaler + sichtbare Historie */
+.narrowDate{width:150px!important;max-width:150px!important}
+.historyBtn{height:30px;width:110px;border:0;border-radius:8px;background:#111;color:#fff;font-size:11px;font-weight:900;margin-top:5px}
+.historyPanel{clear:both;padding-top:4px}.historyPanel h3{margin:14px 0 7px}.historyItem{padding:9px;margin:6px 0;border-radius:9px;background:#f1f2f3;font-size:13px;line-height:1.35}.historyDamage{color:#a00000;font-weight:800}
+@media(max-width:700px){.narrowDate{width:135px!important;max-width:135px!important}}

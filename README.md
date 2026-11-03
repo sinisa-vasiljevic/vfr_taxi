@@ -58,12 +58,11 @@ Firebase Web API-Key exakt aus der Firebase-Konsole übernommen.
 - Getankt, Geputzt und Gewaschen kompakter und gleich gross.
 
 
-### v1.3.6
+### v1.3.5
 Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bis schmaler; Fahrzeughistorie sichtbar in den Busdetails. Sonst kein Redesign.
 
 
-#### v1.3.6
-- Registrierungs-Race-Condition behoben: Der Auth-State-Listener greift nicht mehr auf `users/{uid}` zu, bevor das Profil im Registrierungs-Batch angelegt wurde.
-- Einladung wird vor dem Erstellen des Firebase-Authentication-Kontos geprüft.
-- Nach erfolgreichem Batch wird die Sitzung gezielt initialisiert; neue Benutzer gelangen direkt in die App.
-- Firestore-Regeln bleiben unverändert.
+#### v1.3.7
+- Fahrzeugkarten auf Mobilgeraeten hoeher und inhaltsabhaengig; der naechste Termin wird nicht mehr abgeschnitten.
+- Neuer anklickbarer Fahrzeugstatus 'Geblitzt' in der Fahrtdokumentation.
+- 'Geblitzt' wird am Fahrzeug angezeigt und in der Fahrzeughistorie mitgespeichert.

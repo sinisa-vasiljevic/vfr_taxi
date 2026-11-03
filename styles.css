@@ -18,7 +18,12 @@ nav button{min-width:0;width:100%;padding:0 4px;font-size:clamp(12px,3.35vw,15px
 .historyPanel h3{margin:16px 0 8px}.historyItem{padding:10px;margin:7px 0;border-radius:10px;background:#f1f2f3;font-size:13px;line-height:1.4}.historyDamage{color:#a00000;font-weight:800}
 @media(max-width:700px){.narrowDate{width:140px!important;max-width:140px!important}}
 
-/* v1.3.8: Benutzeraktionen und Loeschaktionen */
+/* v1.3.9 FINAL */
+.vehicle{height:auto!important;min-height:355px!important;overflow:visible!important}
+.vehicle .body{height:auto!important;min-height:343px!important;display:flex!important;flex-direction:column!important}
+.checks{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:6px!important}
+.check{min-width:0!important;padding:9px 3px!important;font-size:clamp(10px,2.7vw,13px)!important;overflow-wrap:anywhere}
+.next{margin-top:12px!important;min-height:24px!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.35!important;padding-bottom:8px!important}
 .dangerBtn{border-color:#d71920!important;color:#b00000!important;background:#fff!important}
 .userInactive{opacity:.68;border-color:#777!important}.userActions{justify-content:flex-end}.userActions .primary{width:auto}
-@media(max-width:700px){.userRow{align-items:flex-start;gap:10px}.userActions{width:100%;justify-content:flex-start}.userActions button{flex:1 1 130px;height:auto;min-height:40px}}
+@media(max-width:700px){.vehicle{height:auto!important;min-height:370px!important}.vehicle .body{height:auto!important;min-height:358px!important}.checks{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:5px!important}.check{padding:8px 2px!important;font-size:clamp(9px,2.65vw,12px)!important}.next{margin-top:12px!important;padding-bottom:10px!important}.toggles{grid-template-columns:repeat(2,minmax(0,1fr))!important}.userRow{align-items:flex-start;gap:10px}.userActions{width:100%;justify-content:flex-start}.userActions button{flex:1 1 130px;height:auto;min-height:40px}}

@@ -62,7 +62,9 @@ Firebase Web API-Key exakt aus der Firebase-Konsole übernommen.
 Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bis schmaler; Fahrzeughistorie sichtbar in den Busdetails. Sonst kein Redesign.
 
 
-#### v1.3.7
-- Fahrzeugkarten auf Mobilgeraeten hoeher und inhaltsabhaengig; der naechste Termin wird nicht mehr abgeschnitten.
-- Neuer anklickbarer Fahrzeugstatus 'Geblitzt' in der Fahrtdokumentation.
-- 'Geblitzt' wird am Fahrzeug angezeigt und in der Fahrzeughistorie mitgespeichert.
+#### v1.3.8
+- Eigene Reservierungen koennen in den Tagesdetails geloescht werden; Master/Admin koennen Reservierungen ebenfalls loeschen.
+- Eigene offene Anfragen koennen weiterhin zurueckgezogen werden, jetzt mit Sicherheitsabfrage.
+- Master kann Benutzer sperren/entsperren und Benutzerprofile aus der App loeschen.
+- Vergabe und Entzug von Adminrechten haben eine Sicherheitsabfrage.
+- Das Loeschen eines Benutzerprofils loescht technisch nicht das Firebase-Authentication-Konto; der App-Zugang wird durch das fehlende aktive Profil verweigert.

@@ -3,16 +3,61 @@ import{initializeApp}from'https://www.gstatic.com/firebasejs/12.4.0/firebase-app
 import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,updateProfile,deleteUser}from'https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js';
 import{getFirestore,doc,getDoc,setDoc,addDoc,updateDoc,deleteDoc,collection,onSnapshot,query,orderBy,serverTimestamp,writeBatch,enableMultiTabIndexedDbPersistence}from'https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js';
 const fb=initializeApp(firebaseConfig),auth=getAuth(fb),db=getFirestore(fb);enableMultiTabIndexedDbPersistence(db).catch(()=>{});
-const $=s=>document.querySelector(s),cont=$('#content'),modal=$('#modal'),mb=$('#modalBody');let mode='login',tab='vehicles',me=null,role='user',vehicles=[],bookings=[],users=[],invites=[],trips=[],damages=[],un=[];
+const $=s=>document.querySelector(s),cont=$('#content'),modal=$('#modal'),mb=$('#modalBody');let mode='login',tab='vehicles',me=null,role='user',registrationInProgress=false,vehicles=[],bookings=[],users=[],invites=[],trips=[],damages=[],un=[];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),fmt=d=>d?new Intl.DateTimeFormat('de-DE').format(new Date(d+'T12:00:00')):'–',iso=d=>d.toISOString().slice(0,10),add=(d,n)=>{let x=new Date(d);x.setDate(x.getDate()+n);return x},toast=m=>{let t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)},admin=()=>role==='admin'||role==='master';
 function status(v){let t=iso(new Date());if(bookings.some(b=>b.vehicleId===v.id&&b.status==='blocked'&&b.date<=t&&(b.endDate||b.date)>=t))return'blocked';if(bookings.some(b=>b.vehicleId===v.id&&b.status==='reserved'&&b.date<=t&&(b.endDate||b.date)>=t))return'reserved';if(bookings.some(b=>b.vehicleId===v.id&&b.status==='requested'&&b.date===t))return'requested';return'free'}
 function tuv(v){if(!v.tuv)return['TÜV nicht erfasst',''];let d=Math.ceil((new Date(v.tuv+'T12:00:00')-new Date())/864e5);return d<0?['✖ TÜV ABGELAUFEN','danger']:d<=28?['● TÜV in höchstens 4 Wochen','danger']:d<=56?['● TÜV in höchstens 8 Wochen','warn']:['✓ TÜV','']}
 async function bootstrap(u){let ref=doc(db,'users',u.uid),s=await getDoc(ref),master=u.email.toLowerCase()===MASTER_EMAIL.toLowerCase();if(!s.exists()){if(!master){await signOut(auth);throw Error('Kein freigeschaltetes Benutzerprofil. Bitte Einladungscode verwenden.')}await setDoc(ref,{name:u.displayName||'Sinisa Vasiljevic',email:u.email.toLowerCase(),active:true,role:'master',createdAt:serverTimestamp()});s=await getDoc(ref)}if(master&&s.data().role!=='master')await updateDoc(ref,{role:'master'});if(!master&&s.data().active!==true){await signOut(auth);throw Error('Dieses Benutzerkonto ist deaktiviert.')}role=master?'master':s.data().role;me={uid:u.uid,name:s.data().name||u.displayName||u.email,email:u.email.toLowerCase()}}
 function listen(){un.forEach(f=>f());un=[onSnapshot(collection(db,'vehicles'),s=>{vehicles=s.docs.map(x=>({id:x.id,...x.data()}));seed();render()}),onSnapshot(query(collection(db,'bookings'),orderBy('date')),s=>{bookings=s.docs.map(x=>({id:x.id,...x.data()}));render()}),onSnapshot(collection(db,'users'),s=>{users=s.docs.map(x=>({id:x.id,...x.data()}));render()}),onSnapshot(collection(db,'invites'),s=>{invites=s.docs.map(x=>({id:x.id,...x.data()}));render()}),onSnapshot(collection(db,'trips'),s=>{trips=s.docs.map(x=>({id:x.id,...x.data()}));}),onSnapshot(collection(db,'damages'),s=>{damages=s.docs.map(x=>({id:x.id,...x.data()}));})]}
 async function seed(){if(vehicles.length||!admin())return;for(let i=1;i<=4;i++)await setDoc(doc(db,'vehicles','bus'+i),{name:'Bus '+i,plate:'Kennzeichen eintragen',km:0,tuv:'',fueled:false,cleaned:false,washed:false,openDamage:0})}
-onAuthStateChanged(auth,async u=>{if(!u){$('#auth').hidden=false;$('#app').hidden=true;me=null;return}try{await bootstrap(u);$('#auth').hidden=true;$('#app').hidden=false;$('#roleBadge').textContent=role==='master'?'👑 Master-Admin':role==='admin'?'🛡 Admin':'👤 Trainer';$('#usersTab').hidden=role!=='master';listen()}catch(e){toast(e.message)}});
+function enterApp(){
+  $('#auth').hidden=true;
+  $('#app').hidden=false;
+  $('#roleBadge').textContent=role==='master'?'👑 Master-Admin':role==='admin'?'🛡 Admin':'👤 Trainer';
+  $('#usersTab').hidden=role!=='master';
+  listen();
+}
+onAuthStateChanged(auth,async u=>{
+  if(!u){$('#auth').hidden=false;$('#app').hidden=true;me=null;return}
+  if(registrationInProgress)return;
+  try{await bootstrap(u);enterApp()}catch(e){toast(e.message)}
+});
 document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.registerOnly').forEach(x=>x.style.display=mode==='register'?'block':'none');$('#authSubmit').textContent=mode==='register'?'Registrieren':'Anmelden'});
-$('#authForm').onsubmit=async e=>{e.preventDefault();let email=$('#email').value.trim().toLowerCase(),pw=$('#password').value;try{if(mode==='login')return await signInWithEmailAndPassword(auth,email,pw);let name=$('#name').value.trim(),code=$('#inviteCode').value.trim().toUpperCase(),master=email===MASTER_EMAIL.toLowerCase();if(!name)throw Error('Name fehlt.');if(master)throw Error('Der Master ist bereits angelegt. Bitte über Anmelden einloggen.');if(!code)throw Error('Einladungscode fehlt.');let c=await createUserWithEmailAndPassword(auth,email,pw);await updateProfile(c.user,{displayName:name});if(master)return await setDoc(doc(db,'users',c.user.uid),{name,email,active:true,role:'master',createdAt:serverTimestamp()});try{let ir=doc(db,'invites',code),is=await getDoc(ir);if(!is.exists()||is.data().active!==true||is.data().used!==false||is.data().email.toLowerCase()!==email)throw Error('Einladungscode ungültig, bereits verwendet oder E-Mail stimmt nicht überein.');let batch=writeBatch(db);batch.set(doc(db,'users',c.user.uid),{name:is.data().name||name,email,active:true,role:'user',inviteCode:code,createdAt:serverTimestamp()});batch.update(ir,{active:false,used:true,usedBy:c.user.uid,usedAt:serverTimestamp()});await batch.commit()}catch(x){await deleteUser(c.user);throw x}}catch(x){toast(x.message)}};
+$('#authForm').onsubmit=async e=>{
+  e.preventDefault();
+  let email=$('#email').value.trim().toLowerCase(),pw=$('#password').value;
+  try{
+    if(mode==='login')return await signInWithEmailAndPassword(auth,email,pw);
+    let name=$('#name').value.trim(),code=$('#inviteCode').value.trim().toUpperCase(),master=email===MASTER_EMAIL.toLowerCase();
+    if(!name)throw Error('Name fehlt.');
+    if(master)throw Error('Der Master ist bereits angelegt. Bitte über Anmelden einloggen.');
+    if(!code)throw Error('Einladungscode fehlt.');
+
+    // Einladung vor dem Anlegen des Auth-Kontos prüfen. Das verhindert halbfertige Konten.
+    let ir=doc(db,'invites',code),is=await getDoc(ir);
+    if(!is.exists()||is.data().active!==true||is.data().used!==false||String(is.data().email||'').toLowerCase()!==email)
+      throw Error('Einladungscode ungültig, bereits verwendet oder E-Mail stimmt nicht überein.');
+
+    registrationInProgress=true;
+    let c=null;
+    try{
+      c=await createUserWithEmailAndPassword(auth,email,pw);
+      await updateProfile(c.user,{displayName:name});
+      let batch=writeBatch(db);
+      batch.set(doc(db,'users',c.user.uid),{name:is.data().name||name,email,active:true,role:'user',inviteCode:code,createdAt:serverTimestamp()});
+      batch.update(ir,{active:false,used:true,usedBy:c.user.uid,usedAt:serverTimestamp()});
+      await batch.commit();
+      await bootstrap(c.user);
+      enterApp();
+      toast('Registrierung erfolgreich.');
+    }catch(x){
+      if(c?.user){try{await deleteUser(c.user)}catch{}}
+      throw x;
+    }finally{
+      registrationInProgress=false;
+    }
+  }catch(x){toast(x.message)}
+};
 $('#logout').onclick=()=>signOut(auth);$('#close').onclick=()=>modal.close();$('#newRequest').onclick=()=>requestForm();document.querySelector('nav').onclick=e=>{let b=e.target.closest('[data-tab]');if(!b)return;tab=b.dataset.tab;document.querySelectorAll('nav [data-tab]').forEach(x=>x.classList.toggle('active',x===b));render()};
 function render(){if(!me)return;$('#stats').innerHTML=`<div class="stat"><small>Busse</small><b>${vehicles.length}</b></div><div class="stat"><small>Offene Anfragen</small><b>${bookings.filter(x=>x.status==='requested').length}</b></div><div class="stat"><small>Reserviert</small><b>${bookings.filter(x=>x.status==='reserved').length}</b></div><div class="stat"><small>Offene Schäden</small><b>${vehicles.reduce((a,v)=>a+(v.openDamage||0),0)}</b></div>`;if(tab==='vehicles')vehicleView();if(tab==='requests')requestView();if(tab==='calendar')calendarView();if(tab==='users')userView()}
 function vehicleView(){cont.innerHTML=`<h2>Fahrzeugübersicht</h2><p>Kennzeichen, Zustand und Fristen auf einen Blick.</p><div class="grid">${vehicles.sort((a,b)=>a.name.localeCompare(b.name)).map(v=>{let s=status(v),t=tuv(v),n=bookings.filter(x=>x.vehicleId===v.id&&x.date>=iso(new Date())).sort((a,b)=>a.date.localeCompare(b.date))[0];return`<article class="vehicle" data-v="${v.id}"><div class="strip ${s}"></div><div class="body"><div class="top"><div><h2>${esc(v.name)}</h2><b>${esc(v.plate)}</b></div><span class="pill ${s}">${{free:'FREI',requested:'ANGEFRAGT',reserved:'RESERVIERT',blocked:'WERKSTATT / GESPERRT'}[s]}</span></div><div class="boxes"><div class="box">KM-Stand<br>${Number(v.km||0).toLocaleString('de-DE')} km</div><div class="box ${t[1]}">${t[0]}<br><small>${fmt(v.tuv)}</small></div></div><div class="checks">${[['fueled','Getankt'],['cleaned','Geputzt'],['washed','Gewaschen']].map(([k,l])=>`<div class="check ${v[k]?'':'no'}">${v[k]?'✓':'✕'}<br>${l}</div>`).join('')}<div class="check ${v.openDamage?'no':''}">${v.openDamage?'✕':'✓'}<br>${v.openDamage||0} Schäden</div></div><div class="next">${n?`Nächster Termin: ${fmt(n.date)} · ${esc(n.team)}`:'Keine geplante Belegung'}</div></div></article>`}).join('')}</div>`;cont.querySelectorAll('[data-v]').forEach(x=>x.onclick=()=>vehicleForm(x.dataset.v))}

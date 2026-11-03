@@ -58,5 +58,12 @@ Firebase Web API-Key exakt aus der Firebase-Konsole übernommen.
 - Getankt, Geputzt und Gewaschen kompakter und gleich gross.
 
 
-### v1.3.5
+### v1.3.6
 Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bis schmaler; Fahrzeughistorie sichtbar in den Busdetails. Sonst kein Redesign.
+
+
+#### v1.3.6
+- Registrierungs-Race-Condition behoben: Der Auth-State-Listener greift nicht mehr auf `users/{uid}` zu, bevor das Profil im Registrierungs-Batch angelegt wurde.
+- Einladung wird vor dem Erstellen des Firebase-Authentication-Kontos geprüft.
+- Nach erfolgreichem Batch wird die Sitzung gezielt initialisiert; neue Benutzer gelangen direkt in die App.
+- Firestore-Regeln bleiben unverändert.

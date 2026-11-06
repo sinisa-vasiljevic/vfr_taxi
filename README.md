@@ -69,3 +69,6 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 
 ### v1.4.3
 - Sichtbare Versionszeile direkt unter Mannschaftsbusse.
+
+#### v1.4.4
+- Geblitzt-Anzeige eindeutig: gruen = Nicht geblitzt, rot = Geblitzt.

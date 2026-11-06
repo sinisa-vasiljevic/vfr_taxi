@@ -85,3 +85,6 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 
 ##### v1.4.7
 - Bearbeiten-Button gelb mit schwarzer Schrift, Bus-Zuweisungen bleiben unveraendert.
+
+##### v1.4.8
+- Bearbeiten bleibt optisch wie bisher, nur die Schrift ist schwarz.

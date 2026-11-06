@@ -77,3 +77,8 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Busanfragen enthalten Datum von und Datum bis.
 - Mehrtaegige Nutzungen werden in Anfrage-, Fahrzeug- und Kalenderuebersicht ueber den gesamten Zeitraum dargestellt.
 - Bestehende eintägige Buchungen bleiben kompatibel.
+
+##### v1.4.6
+- Eigene offene Busanfragen koennen bearbeitet werden.
+- Bearbeitbar: Mannschaft, Datum von/bis, Uhrzeit von/bis, Buswunsch und Ort/Ziel.
+- Fremde Anfragen und bereits reservierte/zugewiesene Anfragen bleiben fuer normale Nutzer unveraenderbar.

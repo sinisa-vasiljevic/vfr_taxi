@@ -82,3 +82,6 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Eigene offene Busanfragen koennen bearbeitet werden.
 - Bearbeitbar: Mannschaft, Datum von/bis, Uhrzeit von/bis, Buswunsch und Ort/Ziel.
 - Fremde Anfragen und bereits reservierte/zugewiesene Anfragen bleiben fuer normale Nutzer unveraenderbar.
+
+##### v1.4.7
+- Bearbeiten-Button gelb mit schwarzer Schrift, Bus-Zuweisungen bleiben unveraendert.

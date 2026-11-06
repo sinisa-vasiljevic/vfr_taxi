@@ -61,8 +61,8 @@ Firebase Web API-Key exakt aus der Firebase-Konsole übernommen.
 ### v1.3.5
 Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bis schmaler; Fahrzeughistorie sichtbar in den Busdetails. Sonst kein Redesign.
 
-### v1.4.1
-- Fahrzeugdatenspeicherung mit sichtbarer Fehlerausgabe korrigiert.
-- Erfolgs-Popup nach dem Speichern eingebaut.
-- Versionsnummer v1.4.1 im Header sichtbar.
-- Pflichtfeld Parkplatz / Standort nach Nutzungsende ergänzt und in der Historie gespeichert.
+### v1.4.2
+- Kennzeichen in der Fahrzeuguebersicht deutlich groesser dargestellt.
+- In der Busanfrage "Trainer" in "Anfragensteller" umbenannt.
+- In der Busanfrage "Zweck" in "Ort / Ziel" umbenannt.
+- Datenstruktur und bestehende Funktionen bleiben unveraendert.

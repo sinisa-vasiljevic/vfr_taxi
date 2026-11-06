@@ -88,3 +88,6 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 
 ##### v1.4.8
 - Bearbeiten bleibt optisch wie bisher, nur die Schrift ist schwarz.
+
+###### v1.4.9
+- Zaehler Reserviert zaehlt alle Reservierungen, deren Enddatum heute oder in der Zukunft liegt. Vollstaendig vergangene Reservierungen werden nicht mehr mitgezaehlt.

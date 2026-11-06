@@ -1,4 +1,4 @@
-export const BUILD_VERSION="1.3.9";
+export const BUILD_VERSION="1.4.3";
 export const firebaseConfig={
   apiKey:"AIzaSyAfIacIHWEAEhOFjsWCBv5IRrPdgQ0xzcA",
   authDomain:"vfr-taxi.firebaseapp.com",

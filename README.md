@@ -134,3 +134,8 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Zielnummer zentral in config.js: 4915128919758.
 - WhatsApp-Text enthaelt Mannschaft, Zeitraum, Anfragensteller, Fahrer, Wunschbus und Ziel.
 - Abbruch oder Schliessen von WhatsApp aendert die bereits gespeicherte Anfrage nicht.
+
+
+############### v1.7.4
+- iPhone/iOS: Ueberlappende Datum- und Uhrzeitfelder korrigiert.
+- Alle Funktionen aus v1.7.3 unveraendert beibehalten.

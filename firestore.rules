@@ -83,6 +83,11 @@ service cloud.firestore {
         && resource.data.status == "requested"
         && request.resource.data.trainerUid == resource.data.trainerUid
         && request.resource.data.status == "requested"
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          "team", "date", "endDate", "from", "to", "vehicleId", "purpose",
+          "driverUid", "driverName", "driverType",
+          "updatedAt", "updatedByUid", "updatedByName"
+        ])
       );
       allow delete: if isAdmin() || (
         hasActiveProfile()
@@ -93,8 +98,31 @@ service cloud.firestore {
 
     match /trips/{tripId} {
       allow read: if isMaster() || hasActiveProfile();
-      allow create: if hasActiveProfile() && request.resource.data.userUid == request.auth.uid;
-      allow update, delete: if isAdmin();
+
+      // Anfragensteller und eingetragener registrierter Fahrer dürfen starten.
+      allow create: if hasActiveProfile()
+        && request.resource.data.userUid == request.auth.uid
+        && request.resource.data.bookingId is string
+        && exists(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId))
+        && get(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.status == "reserved"
+        && (
+          get(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.trainerUid == request.auth.uid
+          || get(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.driverUid == request.auth.uid
+        );
+
+      // Anfragensteller und eingetragener registrierter Fahrer dürfen eine aktive Fahrt beenden.
+      allow update: if isAdmin() || (
+        hasActiveProfile()
+        && resource.data.bookingId is string
+        && request.resource.data.bookingId == resource.data.bookingId
+        && exists(/databases/$(database)/documents/bookings/$(resource.data.bookingId))
+        && (
+          get(/databases/$(database)/documents/bookings/$(resource.data.bookingId)).data.trainerUid == request.auth.uid
+          || get(/databases/$(database)/documents/bookings/$(resource.data.bookingId)).data.driverUid == request.auth.uid
+        )
+      );
+
+      allow delete: if isAdmin();
     }
 
     match /damages/{damageId} {

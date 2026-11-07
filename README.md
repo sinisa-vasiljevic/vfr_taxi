@@ -100,7 +100,7 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Bestaetigung/Zuweisung einer Anfrage bleibt eine einzelne Aktion fuer den gesamten Zeitraum.
 
 
-######### v1.5.1
-- Eingangsdatum und Eingangsuhrzeit bei Busanfragen.
-- Sortierung: aelteste Anfrage zuerst.
-- Bearbeiten behaelt den originalen Eingangszeitpunkt.
+########## v1.5.2
+- Eingangszeitpunkt kompakt in einer Zeile: Angefragt: Datum, Uhrzeit Uhr.
+- Nach dem Loeschen eines App-Benutzers kann dasselbe bestehende Firebase-Authentication-Konto mit neuer Einladung und bisherigem Passwort erneut verknuepft werden.
+- Beim Fehlschlag wird nur ein in diesem Registrierungsversuch neu erstelltes Auth-Konto zurueckgerollt; ein bestehendes Konto wird nie geloescht.

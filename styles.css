@@ -55,5 +55,5 @@ nav button{min-width:0;width:100%;padding:0 4px;font-size:clamp(12px,3.35vw,15px
   .monthEvent.rangeEnd{margin-left:-6px;width:calc(100% + 6px)}
 }
 
-/* v1.5.1: Eingangszeitpunkt */
-.requestReceived{display:inline-block;margin-top:5px;font-size:.92em;color:#555}.requestReceived b{color:#111}
+/* v1.5.2: kompakter Eingangszeitpunkt */
+.requestReceived{display:block;margin-top:5px;font-size:.84em;color:#555;white-space:nowrap;letter-spacing:-.15px}.requestReceived b{color:#111}

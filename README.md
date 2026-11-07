@@ -91,3 +91,10 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 
 ###### v1.4.9
 - Zaehler Reserviert zaehlt alle Reservierungen, deren Enddatum heute oder in der Zukunft liegt. Vollstaendig vergangene Reservierungen werden nicht mehr mitgezaehlt.
+
+
+######## v1.5.0
+- Mehrtaegige Anfragen/Reservierungen bleiben genau ein Buchungsdatensatz und werden im Monatskalender als zusammenhaengender Balken dargestellt.
+- Bei Wochenwechsel wird der Balken in der naechsten Kalenderzeile optisch fortgesetzt.
+- Statusfarben unveraendert: frei gruen, angefragt gelb, reserviert rot, Werkstatt/gesperrt schwarz.
+- Bestaetigung/Zuweisung einer Anfrage bleibt eine einzelne Aktion fuer den gesamten Zeitraum.

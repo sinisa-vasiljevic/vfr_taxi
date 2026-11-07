@@ -38,3 +38,19 @@ nav button{min-width:0;width:100%;padding:0 4px;font-size:clamp(12px,3.35vw,15px
 
 /* v1.4.7 */
 .actions .editRequestBtn{color:#111!important;font-weight:900!important}
+
+
+/* v1.5.0: Mehrtaegige Buchungen im Monatskalender als zusammenhaengende Balken.
+   Bestehende Statusfarben bleiben unveraendert. */
+.monthEvent.rangeStart{border-radius:6px 0 0 6px;margin-right:-8px;width:calc(100% + 8px);position:relative;z-index:2}
+.monthEvent.rangeMiddle{border-radius:0;margin-left:-8px;margin-right:-8px;width:calc(100% + 16px);position:relative;z-index:2}
+.monthEvent.rangeEnd{border-radius:0 6px 6px 0;margin-left:-8px;width:calc(100% + 8px);position:relative;z-index:2}
+.monthEvent.single{border-radius:6px}
+.monthDay{overflow:visible}
+.monthGrid{overflow:visible}
+.monthDay.outside .monthEvent{pointer-events:auto}
+@media(max-width:700px){
+  .monthEvent.rangeStart{margin-right:-6px;width:calc(100% + 6px)}
+  .monthEvent.rangeMiddle{margin-left:-6px;margin-right:-6px;width:calc(100% + 12px)}
+  .monthEvent.rangeEnd{margin-left:-6px;width:calc(100% + 6px)}
+}

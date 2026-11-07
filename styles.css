@@ -58,4 +58,4 @@ nav button{min-width:0;width:100%;padding:0 4px;font-size:clamp(12px,3.35vw,15px
 .requestReceived{display:block;margin-top:5px;font-size:.84em;color:#555;white-space:nowrap;letter-spacing:-.15px}.requestReceived b{color:#111}
 
 /* v1.6.0 */
-.actions button.wishBus{background:#f6c900!important;color:#111!important;border-color:#d4ac00!important}.externalDriverLabel{display:none}
+.actions button.wishBus{background:#39ff14!important;color:#071b00!important;border-color:#18c900!important;box-shadow:0 0 0 2px rgba(57,255,20,.22)!important}.externalDriverLabel{display:none}

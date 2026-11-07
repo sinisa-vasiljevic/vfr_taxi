@@ -109,3 +109,8 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Registrierter Fahrer dokumentiert die Fahrt; bei externem Fahrer dokumentiert der Anfragesteller.
 - Normale Bearbeitung endet 24 Stunden nach geplantem Fahrtende; Admin/Master dauerhaft.
 - Wiederregistrierung geloeschter App-Benutzer mit bestehendem Auth-Konto und bisherigem Passwort.
+
+
+############ v1.6.1
+- Wunschbus-Zuweisungsbutton jetzt neongruen statt gelb.
+- Fahrer-Auswahl aus v1.6.0 unveraendert enthalten und im fertigen ZIP verifiziert.

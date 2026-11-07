@@ -100,7 +100,12 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Bestaetigung/Zuweisung einer Anfrage bleibt eine einzelne Aktion fuer den gesamten Zeitraum.
 
 
-########## v1.5.2
-- Eingangszeitpunkt kompakt in einer Zeile: Angefragt: Datum, Uhrzeit Uhr.
-- Nach dem Loeschen eines App-Benutzers kann dasselbe bestehende Firebase-Authentication-Konto mit neuer Einladung und bisherigem Passwort erneut verknuepft werden.
-- Beim Fehlschlag wird nur ein in diesem Registrierungsversuch neu erstelltes Auth-Konto zurueckgerollt; ein bestehendes Konto wird nie geloescht.
+########### v1.6.0
+- Zaehlerbezeichnung Reservierungen.
+- Gewuenschter Bus wird bei der Admin-Zuweisung gelb markiert.
+- Zeitgenaue Kollisionspruefung bei Anfrage, Bearbeitung und Zuweisung.
+- Fahrer ist Pflicht und getrennt vom Anfragesteller.
+- Admin/Master kann externe Fahrer manuell erfassen.
+- Registrierter Fahrer dokumentiert die Fahrt; bei externem Fahrer dokumentiert der Anfragesteller.
+- Normale Bearbeitung endet 24 Stunden nach geplantem Fahrtende; Admin/Master dauerhaft.
+- Wiederregistrierung geloeschter App-Benutzer mit bestehendem Auth-Konto und bisherigem Passwort.

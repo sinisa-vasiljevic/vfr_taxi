@@ -2,46 +2,107 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    function signedIn() { return request.auth != null; }
-    function isMaster() { return signedIn() && request.auth.token.email == "v.sinisa@gmx.de"; }
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isMaster() {
+      return signedIn()
+        && request.auth.token.email == "v.sinisa@gmx.de";
+    }
+
     function hasActiveProfile() {
       return signedIn()
         && exists(/databases/$(database)/documents/users/$(request.auth.uid))
         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.active == true;
     }
-    function userRole() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role; }
-    function isAdmin() { return isMaster() || (hasActiveProfile() && userRole() == "admin"); }
 
-    match /invites/{code} {
-      allow get: if true;
-      allow list, create, delete: if isMaster();
-      allow update: if isMaster() || (
-        signedIn()
-        && resource.data.active == true
-        && resource.data.used == false
-        && resource.data.email == request.auth.token.email
-        && request.resource.data.email == resource.data.email
-        && request.resource.data.name == resource.data.name
-        && request.resource.data.createdAt == resource.data.createdAt
-        && request.resource.data.createdBy == resource.data.createdBy
-        && request.resource.data.active == false
-        && request.resource.data.used == true
-        && request.resource.data.usedBy == request.auth.uid
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["active", "used", "usedAt", "usedBy"])
-      );
+    function userRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
     }
 
+    function isAdmin() {
+      return isMaster()
+        || (hasActiveProfile() && userRole() == "admin");
+    }
+
+    function isBookingParticipant(bookingId) {
+      return hasActiveProfile()
+        && exists(/databases/$(database)/documents/bookings/$(bookingId))
+        && (
+          get(/databases/$(database)/documents/bookings/$(bookingId)).data.trainerUid == request.auth.uid
+          || get(/databases/$(database)/documents/bookings/$(bookingId)).data.driverUid == request.auth.uid
+        );
+    }
+
+    // =========================================================
+    // EINLADUNGEN
+    // Bewährter Trainingsplaner-Aufbau:
+    // Einladung prüfen, Benutzerprofil und Verbrauch der Einladung
+    // werden anschließend gemeinsam in einem Batch geschrieben.
+    // =========================================================
+
+    match /invites/{code} {
+
+      // Ein konkreter Einladungscode darf für den Erstzugang
+      // geprüft werden. Eine Auflistung bleibt geschützt.
+      allow get: if true;
+
+      // Nur der Master darf Einladungen auflisten, anlegen
+      // oder löschen.
+      allow list, create, delete: if isMaster();
+
+      // Master darf Einladungen verwalten. Ein frisch
+      // authentifizierter Benutzer darf ausschließlich seine
+      // eigene gültige Einladung einmalig verbrauchen.
+      allow update: if isMaster()
+        || (
+          signedIn()
+          && resource.data.active == true
+          && resource.data.used == false
+          && resource.data.email == request.auth.token.email
+          && request.resource.data.email == resource.data.email
+          && request.resource.data.name == resource.data.name
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.createdBy == resource.data.createdBy
+          && request.resource.data.active == false
+          && request.resource.data.used == true
+          && request.resource.data.usedBy == request.auth.uid
+          && request.resource.data.diff(resource.data)
+               .affectedKeys()
+               .hasOnly(["active", "used", "usedAt", "usedBy"])
+        );
+    }
+
+    // =========================================================
+    // BENUTZER UND ROLLEN
+    // =========================================================
+
     match /users/{uid} {
+
+      // Aktive Benutzer sehen die Benutzerliste. Der Master
+      // kann die Benutzerverwaltung jederzeit öffnen.
       allow read: if isMaster() || hasActiveProfile();
+
+      // Master-Profil für die fest hinterlegte Master-E-Mail.
       allow create: if isMaster()
         && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(["name", "email", "active", "role", "createdAt"])
+        && request.resource.data.keys().hasOnly([
+          "name", "email", "active", "role", "createdAt"
+        ])
         && request.resource.data.email == request.auth.token.email
         && request.resource.data.active == true
         && request.resource.data.role == "master";
+
+      // Trainerprofil nur zusammen mit dem atomaren Verbrauch
+      // einer passenden Einladung. getAfter() prüft den Zustand
+      // der Einladung nach Abschluss desselben Batches.
       allow create: if signedIn()
         && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(["name", "email", "active", "role", "inviteCode", "createdAt"])
+        && request.resource.data.keys().hasOnly([
+          "name", "email", "active", "role", "inviteCode", "createdAt"
+        ])
         && request.resource.data.email == request.auth.token.email
         && request.resource.data.active == true
         && request.resource.data.role == "user"
@@ -52,83 +113,191 @@ service cloud.firestore {
         && getAfter(/databases/$(database)/documents/invites/$(request.resource.data.inviteCode)).data.active == false
         && getAfter(/databases/$(database)/documents/invites/$(request.resource.data.inviteCode)).data.used == true
         && getAfter(/databases/$(database)/documents/invites/$(request.resource.data.inviteCode)).data.usedBy == request.auth.uid;
+
+      // Nur der Master darf Benutzerrollen oder Aktivstatus ändern.
       allow update: if isMaster()
         && resource.data.role != "master"
         && request.resource.data.email == resource.data.email
         && request.resource.data.role in ["user", "admin"];
-      allow delete: if isMaster() && request.auth.uid != uid && resource.data.role != "master";
+
+      // Master kann andere Benutzerprofile löschen,
+      // jedoch niemals das eigene Master-Profil.
+      allow delete: if isMaster()
+        && request.auth.uid != uid
+        && resource.data.role != "master";
     }
+
+    // =========================================================
+    // FAHRZEUGE
+    // =========================================================
 
     match /vehicles/{vehicleId} {
       allow read: if isMaster() || hasActiveProfile();
       allow create, delete: if isAdmin();
-      allow update: if isAdmin() || (
-        hasActiveProfile()
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
-          "km", "fueled", "cleaned", "washed", "flashed", "openDamage", "updatedAt"
-        ])
-      );
+
+      // Aktive Benutzer dürfen ausschließlich die bei Fahrtstart
+      // oder Fahrtende benötigten Fahrzeugdaten aktualisieren.
+      allow update: if isAdmin()
+        || (
+          hasActiveProfile()
+          && request.resource.data.diff(resource.data)
+               .affectedKeys()
+               .hasOnly([
+                 "km",
+                 "currentLocation",
+                 "fueled",
+                 "cleaned",
+                 "washed",
+                 "flashed",
+                 "openDamage",
+                 "updatedAt"
+               ])
+        );
     }
 
+    // =========================================================
+    // ANFRAGEN, RESERVIERUNGEN UND WERKSTATTSPERREN
+    // =========================================================
+
     match /bookings/{bookingId} {
+
       allow read: if isMaster() || hasActiveProfile();
-      allow create: if isAdmin() || (
-        hasActiveProfile()
-        && request.resource.data.status == "requested"
-        && request.resource.data.trainerUid == request.auth.uid
-      );
-      allow update: if isAdmin() || (
-        hasActiveProfile()
-        && resource.data.trainerUid == request.auth.uid
-        && resource.data.status == "requested"
-        && request.resource.data.trainerUid == resource.data.trainerUid
-        && request.resource.data.status == "requested"
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
-          "team", "date", "endDate", "from", "to", "vehicleId", "purpose",
-          "driverUid", "driverName", "driverType",
-          "updatedAt", "updatedByUid", "updatedByName"
-        ])
-      );
-      allow delete: if isAdmin() || (
-        hasActiveProfile()
-        && resource.data.trainerUid == request.auth.uid
-        && resource.data.status in ["requested", "reserved"]
-      );
+
+      allow create: if isAdmin()
+        || (
+          hasActiveProfile()
+          && request.resource.data.status == "requested"
+          && request.resource.data.trainerUid == request.auth.uid
+        );
+
+      // Admin/Master dürfen alle Buchungen bearbeiten.
+      // Normale Benutzer dürfen ausschließlich ihre eigene offene
+      // Anfrage bearbeiten. Der Anfragensteller und der Status
+      // bleiben dabei unveränderbar; der Fahrer darf geändert werden.
+      allow update: if isAdmin()
+        || (
+          hasActiveProfile()
+          && resource.data.trainerUid == request.auth.uid
+          && resource.data.status == "requested"
+          && request.resource.data.trainerUid == resource.data.trainerUid
+          && request.resource.data.status == "requested"
+          && request.resource.data.diff(resource.data)
+               .affectedKeys()
+               .hasOnly([
+                 "team",
+                 "date",
+                 "endDate",
+                 "from",
+                 "to",
+                 "vehicleId",
+                 "purpose",
+                 "driverUid",
+                 "driverName",
+                 "driverType",
+                 "updatedAt",
+                 "updatedByUid",
+                 "updatedByName"
+               ])
+        )
+        // Anfragensteller oder eingetragener Fahrer dürfen bei einer
+        // reservierten Fahrt nur die Fahrtstatus-Felder setzen.
+        || (
+          hasActiveProfile()
+          && resource.data.status == "reserved"
+          && request.resource.data.status == resource.data.status
+          && request.resource.data.trainerUid == resource.data.trainerUid
+          && request.resource.data.driverUid == resource.data.driverUid
+          && (
+            resource.data.trainerUid == request.auth.uid
+            || resource.data.driverUid == request.auth.uid
+          )
+          && request.resource.data.diff(resource.data)
+               .affectedKeys()
+               .hasOnly([
+                 "tripStatus",
+                 "tripId",
+                 "tripStartedAt",
+                 "tripEndedAt"
+               ])
+        );
+
+      // Admin/Master dürfen Einträge löschen.
+      // Normale Benutzer dürfen ausschließlich ihre eigenen
+      // Anfragen oder bereits bestätigten Reservierungen löschen.
+      // Werkstatt-/Sperreinträge bleiben dadurch geschützt.
+      allow delete: if isAdmin()
+        || (
+          hasActiveProfile()
+          && resource.data.trainerUid == request.auth.uid
+          && resource.data.status in ["requested", "reserved"]
+        );
     }
+
+    // =========================================================
+    // FAHRTDOKUMENTATION
+    // =========================================================
 
     match /trips/{tripId} {
       allow read: if isMaster() || hasActiveProfile();
 
-      // Anfragensteller und eingetragener registrierter Fahrer dürfen starten.
-      allow create: if hasActiveProfile()
-        && request.resource.data.userUid == request.auth.uid
-        && request.resource.data.bookingId is string
-        && exists(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId))
-        && get(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.status == "reserved"
-        && (
-          get(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.trainerUid == request.auth.uid
-          || get(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.driverUid == request.auth.uid
+      // Sowohl der feste Anfragensteller als auch der eingetragene
+      // registrierte Fahrer dürfen die reservierte Fahrt starten.
+      allow create: if isAdmin()
+        || (
+          hasActiveProfile()
+          && request.resource.data.userUid == request.auth.uid
+          && request.resource.data.bookingId is string
+          && isBookingParticipant(request.resource.data.bookingId)
+          && get(/databases/$(database)/documents/bookings/$(request.resource.data.bookingId)).data.status == "reserved"
         );
 
-      // Anfragensteller und eingetragener registrierter Fahrer dürfen eine aktive Fahrt beenden.
-      allow update: if isAdmin() || (
-        hasActiveProfile()
-        && resource.data.bookingId is string
-        && request.resource.data.bookingId == resource.data.bookingId
-        && exists(/databases/$(database)/documents/bookings/$(resource.data.bookingId))
-        && (
-          get(/databases/$(database)/documents/bookings/$(resource.data.bookingId)).data.trainerUid == request.auth.uid
-          || get(/databases/$(database)/documents/bookings/$(resource.data.bookingId)).data.driverUid == request.auth.uid
-        )
-      );
+      // Beide Beteiligten dürfen eine aktive Fahrt beenden,
+      // unabhängig davon, wer die Fahrt gestartet hat.
+      allow update: if isAdmin()
+        || (
+          resource.data.bookingId is string
+          && isBookingParticipant(resource.data.bookingId)
+          && resource.data.status == "active"
+          && request.resource.data.bookingId == resource.data.bookingId
+          && request.resource.data.vehicleId == resource.data.vehicleId
+          && request.resource.data.diff(resource.data)
+               .affectedKeys()
+               .hasOnly([
+                 "status",
+                 "kmEnd",
+                 "distance",
+                 "endLocation",
+                 "fueled",
+                 "cleaned",
+                 "washed",
+                 "flashed",
+                 "damageText",
+                 "endedAt",
+                 "updatedAt",
+                 "updatedByUid",
+                 "updatedByName",
+                 "autoCloseReason",
+                 "lastDriverName",
+                 "autoCloseTriggeredBy",
+                 "returnDataIncomplete"
+               ])
+        );
 
       allow delete: if isAdmin();
     }
 
+    // =========================================================
+    // SCHÄDEN UND MÄNGEL
+    // =========================================================
+
     match /damages/{damageId} {
       allow read: if isMaster() || hasActiveProfile();
-      allow create: if hasActiveProfile() && request.resource.data.reportedByUid == request.auth.uid;
+
+      allow create: if hasActiveProfile()
+        && request.resource.data.reportedByUid == request.auth.uid;
+
       allow update: if isAdmin();
+
       allow delete: if isMaster();
     }
   }

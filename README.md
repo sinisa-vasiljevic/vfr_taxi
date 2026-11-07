@@ -153,3 +153,12 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Die Bezeichnungen Von/Bis wurden in Neue Anfrage und Bearbeiten in Zeit von/Zeit bis geaendert.
 - Fahrer-Beschriftung bleibt rot; Auswahltext bleibt schwarz.
 - Gleiche Darstellung fuer Master, Admin und Benutzer durch gemeinsame Formulare.
+
+
+################## v1.8.2
+- „Fahrt starten“ verschwindet nach dem tatsächlichen Reservierungsende.
+- Eine abgelaufene, nie gestartete Fahrt kann auch aus einer veralteten Ansicht nicht nachträglich gestartet werden.
+- Bei bereits gestarteter Fahrt bleibt „Fahrt beenden“ auch nach Reservierungsende verfügbar.
+- Sobald Anfragensteller oder Fahrer beendet, verschwindet „Fahrt beenden“ bei beiden durch Echtzeit-Aktualisierung.
+- TÜV-Anzeige und Eingabe auf Monat/Jahr umgestellt, z. B. 02 / 2027.
+- TÜV gilt intern bis zum letzten Kalendertag des eingetragenen Monats.

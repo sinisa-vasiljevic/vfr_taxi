@@ -145,3 +145,11 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Mobile Anfrageformulare: Datum von, Datum bis, Von und Bis stehen wieder jeweils in eigener voller Zeile, damit iOS-Felder sauber und ohne gequetschte Optik dargestellt werden.
 - Beschriftung Fahrer ist rot; Inhalt des Fahrer-Auswahlfelds bleibt schwarz.
 - Alle Funktionen aus v1.7.4 unveraendert beibehalten.
+
+
+################# v1.7.6
+- Datum von und Datum bis wieder nebeneinander auf Mobilgeraeten.
+- Zeit von und Zeit bis wieder nebeneinander auf Mobilgeraeten.
+- Die Bezeichnungen Von/Bis wurden in Neue Anfrage und Bearbeiten in Zeit von/Zeit bis geaendert.
+- Fahrer-Beschriftung bleibt rot; Auswahltext bleibt schwarz.
+- Gleiche Darstellung fuer Master, Admin und Benutzer durch gemeinsame Formulare.

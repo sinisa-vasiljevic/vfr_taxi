@@ -79,3 +79,12 @@ nav button{min-width:0;width:100%;padding:0 4px;font-size:clamp(12px,3.35vw,15px
  .requestForm .compactPair label,.requestEditForm .compactPair label{width:100%!important;overflow:visible!important}
  .requestForm .compactPair input,.requestEditForm .compactPair input{width:100%!important;max-width:100%!important;box-sizing:border-box!important;font-size:16px!important;padding:10px 12px!important}
 }
+
+/* v1.7.6: paired request fields for every role and both request forms */
+@media(max-width:600px){
+ .requestForm .compactPair,.requestEditForm .compactPair{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:12px!important;width:100%!important}
+ .requestForm .compactPair label,.requestEditForm .compactPair label{min-width:0!important;width:auto!important;overflow:visible!important}
+ .requestForm .compactPair input,.requestEditForm .compactPair input{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;font-size:15px!important;padding:8px 6px!important}
+}
+.requestForm .personBlock>label:nth-child(2),.requestEditForm .personBlock>label:nth-child(2){color:#d71920!important}
+.requestForm .personBlock>label:nth-child(2) select,.requestEditForm .personBlock>label:nth-child(2) select{color:#111!important}

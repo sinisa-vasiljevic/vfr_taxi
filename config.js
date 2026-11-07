@@ -1,4 +1,4 @@
-export const BUILD_VERSION="1.7.2";
+export const BUILD_VERSION="1.7.3";
 export const firebaseConfig={
   apiKey:"AIzaSyAfIacIHWEAEhOFjsWCBv5IRrPdgQ0xzcA",
   authDomain:"vfr-taxi.firebaseapp.com",
@@ -8,3 +8,5 @@ export const firebaseConfig={
   appId:"1:983574590830:web:a4eb2e79f21d2f091abd7f"
 };
 export const MASTER_EMAIL="v.sinisa@gmx.de";
+
+export const WHATSAPP_ADMIN_NUMBER="4915128919758";

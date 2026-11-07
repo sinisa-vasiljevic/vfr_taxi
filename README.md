@@ -124,3 +124,13 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Fahrtende mit kompletter Rueckgabedokumentation.
 - Automatischer Abschluss offener Vorfahrt und erweiterte Historie.
 - Master kann einzelne Fahrt- und Schadens-Historieneintraege nach zwei Bestaetigungen endgueltig loeschen.
+
+
+############## v1.7.3
+- Neue Busanfrage: Anfragensteller und Fahrer direkt untereinander.
+- Datum und Uhrzeit mobil kompakt in zwei Spalten.
+- Anfrage wird vor der Erfolgsmeldung in Firestore gespeichert und erneut gelesen.
+- Nach erfolgreicher Speicherung erscheint Admin per WhatsApp informieren.
+- Zielnummer zentral in config.js: 4915128919758.
+- WhatsApp-Text enthaelt Mannschaft, Zeitraum, Anfragensteller, Fahrer, Wunschbus und Ziel.
+- Abbruch oder Schliessen von WhatsApp aendert die bereits gespeicherte Anfrage nicht.

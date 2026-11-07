@@ -139,3 +139,9 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 ############### v1.7.4
 - iPhone/iOS: Ueberlappende Datum- und Uhrzeitfelder korrigiert.
 - Alle Funktionen aus v1.7.3 unveraendert beibehalten.
+
+
+################ v1.7.5
+- Mobile Anfrageformulare: Datum von, Datum bis, Von und Bis stehen wieder jeweils in eigener voller Zeile, damit iOS-Felder sauber und ohne gequetschte Optik dargestellt werden.
+- Beschriftung Fahrer ist rot; Inhalt des Fahrer-Auswahlfelds bleibt schwarz.
+- Alle Funktionen aus v1.7.4 unveraendert beibehalten.

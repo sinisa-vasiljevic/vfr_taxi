@@ -114,3 +114,13 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 ############ v1.6.1
 - Wunschbus-Zuweisungsbutton jetzt neongruen statt gelb.
 - Fahrer-Auswahl aus v1.6.0 unveraendert enthalten und im fertigen ZIP verifiziert.
+
+
+############# v1.7.0
+- Fehler beim nachtraeglichen Speichern von Buswunsch und Fahrer behoben und Speicherung verifiziert.
+- Meine Fahrten mit Fahrt starten und Fahrt beenden.
+- KM Abfahrt, KM Ankunft, Parkplatz, Zustand, Geblitzt und Schaeden an konkrete Reservierung gebunden.
+- Automatischer Abschluss einer offenen vorherigen Fahrt beim Start der naechsten Fahrt desselben Busses.
+- Neue KM Abfahrt wird als alte KM Ankunft uebernommen; Warnhistorie nennt letzten Fahrer und Ausloeser.
+- Historie zeigt Fahrtzeit, Startzeit, letzte Aenderung und Bearbeiter.
+- 24-Stunden-Recht fuer Fahrer/Anfragesteller bei externem Fahrer; Admin/Master dauerhaft.

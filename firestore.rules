@@ -103,6 +103,7 @@ service cloud.firestore {
     match /vehicles/{vehicleId} {
       allow read: if isMaster() || hasActiveProfile();
       allow create, delete: if isAdmin();
+
       allow update: if isAdmin()
         || (
           hasActiveProfile()
@@ -129,7 +130,17 @@ service cloud.firestore {
           && request.resource.data.trainerUid == request.auth.uid
         );
 
-      allow update: if isAdmin();
+      // Admin/Master darf alle Buchungen bearbeiten.
+      // Normale Benutzer dürfen ausschließlich ihre eigene
+      // noch offene Anfrage bearbeiten.
+      allow update: if isAdmin()
+        || (
+          hasActiveProfile()
+          && resource.data.trainerUid == request.auth.uid
+          && resource.data.status == "requested"
+          && request.resource.data.trainerUid == resource.data.trainerUid
+          && request.resource.data.status == "requested"
+        );
 
       allow delete: if isAdmin()
         || (
@@ -145,8 +156,10 @@ service cloud.firestore {
 
     match /trips/{tripId} {
       allow read: if isMaster() || hasActiveProfile();
+
       allow create: if hasActiveProfile()
         && request.resource.data.userUid == request.auth.uid;
+
       allow update, delete: if isAdmin();
     }
 
@@ -156,9 +169,12 @@ service cloud.firestore {
 
     match /damages/{damageId} {
       allow read: if isMaster() || hasActiveProfile();
+
       allow create: if hasActiveProfile()
         && request.resource.data.reportedByUid == request.auth.uid;
+
       allow update: if isAdmin();
+
       allow delete: if isMaster();
     }
   }

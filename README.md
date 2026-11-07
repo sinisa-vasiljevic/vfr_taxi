@@ -116,11 +116,11 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Fahrer-Auswahl aus v1.6.0 unveraendert enthalten und im fertigen ZIP verifiziert.
 
 
-############# v1.7.1
-- Neu auf der guten v1.6.1 aufgebaut; kein grosser Meine-Fahrten-Block.
-- Fahrt starten/beenden erscheint nur an der passenden Buskarte des tatsaechlich eingetragenen Fahrers.
-- Admin/Master sieht weiterhin zuerst und vollstaendig die vier Buskarten und erhaelt nicht automatisch fremde Fahrten.
-- Externer Fahrer: Der Anfragesteller dokumentiert stellvertretend.
-- Buswunsch/Fahrer bei offener Anfrage werden nach dem Bearbeiten gespeichert und verifiziert.
-- Automatischer Abschluss einer offenen vorherigen Fahrt mit KM-Uebernahme und Warnhistorie.
-- Historie zeigt Start, letzte Aenderung, Bearbeiter, letzten Fahrer und Ausloeser.
+############# v1.7.2
+- Auf v1.6.1 neu aufgebaut plus kontrollierte Fahrtfunktionen.
+- Bearbeitungsdialog kompakt; Anfragensteller und Fahrer direkt untereinander.
+- Buswunsch und Fahrer werden nach Update aus Firestore gelesen und verifiziert.
+- Fahrtstart nur am passenden Bus fuer den tatsaechlichen Fahrer; kein Meine-Fahrten-Block.
+- Fahrtende mit kompletter Rueckgabedokumentation.
+- Automatischer Abschluss offener Vorfahrt und erweiterte Historie.
+- Master kann einzelne Fahrt- und Schadens-Historieneintraege nach zwei Bestaetigungen endgueltig loeschen.

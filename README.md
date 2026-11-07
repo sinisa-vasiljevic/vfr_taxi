@@ -162,3 +162,13 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Sobald Anfragensteller oder Fahrer beendet, verschwindet „Fahrt beenden“ bei beiden durch Echtzeit-Aktualisierung.
 - TÜV-Anzeige und Eingabe auf Monat/Jahr umgestellt, z. B. 02 / 2027.
 - TÜV gilt intern bis zum letzten Kalendertag des eingetragenen Monats.
+
+
+################## v1.8.4
+- Verbindliche Basis: die vom Nutzer bereitgestellte Version 1.8.2.
+- Fahrtstart für Master, Admin, Anfragensteller und eingetragenen Fahrer frühestens 24 Stunden vor Reservierungsbeginn.
+- Nach Reservierungsende ist eine nie gestartete Fahrt nicht mehr startbar.
+- Läuft für den Bus noch eine andere Fahrt, erscheint ein orangefarbener Startbutton mit Hinweis „Bus noch in Nutzung“.
+- Beim Start bleibt die vorhandene Sicherheitsabfrage erhalten; die alte aktive Fahrt wird erst nach Bestätigung automatisch abgeschlossen.
+- Die Startberechtigung und das Zeitfenster werden beim Öffnen und nochmals unmittelbar beim Absenden geprüft.
+- Eine aktive Fahrt kann weiterhin nach Reservierungsende beendet werden.

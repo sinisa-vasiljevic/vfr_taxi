@@ -98,3 +98,9 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Bei Wochenwechsel wird der Balken in der naechsten Kalenderzeile optisch fortgesetzt.
 - Statusfarben unveraendert: frei gruen, angefragt gelb, reserviert rot, Werkstatt/gesperrt schwarz.
 - Bestaetigung/Zuweisung einer Anfrage bleibt eine einzelne Aktion fuer den gesamten Zeitraum.
+
+
+######### v1.5.1
+- Eingangsdatum und Eingangsuhrzeit bei Busanfragen.
+- Sortierung: aelteste Anfrage zuerst.
+- Bearbeiten behaelt den originalen Eingangszeitpunkt.

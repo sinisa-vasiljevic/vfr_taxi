@@ -1,4 +1,4 @@
-# VfR Taxi PWA v1.9.1
+# VfR Taxi PWA v1.9.2
 
 Vollständiger, konsolidierter Projektstand der VfR-Taxi-PWA.
 
@@ -55,3 +55,10 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 1. Gesamten Inhalt des ZIP in das GitHub-Repository hochladen.
 2. `firestore.rules` in Firebase unter Firestore Database > Regeln veröffentlichen.
 3. Nach Aktualisierung die installierte PWA einmal vollständig schließen und neu öffnen.
+
+
+### Kilometerlogik v1.9.2
+- Harte Untergrenze beim Fahrtstart ist der Start-KM der zuletzt gestarteten Fahrt desselben Busses.
+- Ein möglicherweise falsch zu hoch eingetragener letzter End-KM blockiert die nächste Fahrt nicht.
+- Liegt der neue Start-KM unter dem letzten End-KM, aber nicht unter dem letzten Start-KM, erscheint eine Warnung mit bewusster Bestätigung.
+- Die bestätigte Korrektur wird im neuen Fahrteintrag mit vorherigem Start-KM, vorherigem End-KM, neuem Tachostand, Benutzer und Zeitstempel dokumentiert.

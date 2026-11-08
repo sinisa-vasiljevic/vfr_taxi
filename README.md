@@ -1,4 +1,54 @@
-# VfR Taxi PWA v1.3.2
+# VfR Taxi PWA v1.8.9
+
+## Aktueller Stand v1.8.9
+
+Technische Projektdokumentation der VfR-Taxi-PWA. In dieser README bleiben die internen Rollenbegriffe **Master**, **Admin** und **Nutzer** bewusst erhalten.
+
+### Rollen und Rechte
+- **Master:** fest hinterlegtes Masterkonto mit vollständiger Benutzer- und Systemverwaltung.
+- **Admin:** Verwaltung von Anfragen, Reservierungen, Fahrzeugen und Fahrten.
+- **Nutzer:** eigene Anfragen erstellen/bearbeiten und als Anfragensteller bzw. eingetragener Fahrer Fahrten bedienen.
+- Anfragensteller bleibt unveränderbar; der eingetragene Fahrer kann bei einer eigenen offenen Anfrage geändert werden.
+- Master/Admin, Anfragensteller und eingetragener registrierter Fahrer können berechtigte Fahrten starten.
+- Aktive Fahrten können von Master/Admin sowie Anfragensteller oder eingetragenem Fahrer beendet werden.
+
+### Reservierungs- und Fahrtlogik
+- Offene Anfragen blockieren noch keinen Bus; erst die verbindliche Zuweisung erzeugt die Belegung.
+- Bereits reservierte oder gesperrte Busse sind bei kollidierenden Zuweisungen deaktiviert.
+- Fahrtstart frühestens **24 Stunden vor Reservierungsbeginn** und nur bis zum Reservierungsende, sofern die Fahrt noch nicht gestartet wurde.
+- Läuft noch eine vorherige Fahrt, wird der Start orange gewarnt; nach Bestätigung kann die vorherige Fahrt automatisch abgeschlossen werden.
+- Der neue Start-KM-Stand wird dabei als End-KM-Stand der automatisch abgeschlossenen Vorgängerfahrt übernommen.
+- Bei automatischem Abschluss werden Anfragensteller, eingetragener Fahrer und auslösende Person dokumentiert.
+
+### Einheitliche Statusfarben
+- **Gelb:** ANGEFRAGT
+- **Rot:** RESERVIERT
+- **Blau:** IN NUTZUNG
+- **Orange:** ÜBERFÄLLIG
+- **Grau:** VERGANGEN
+- **Grau/Orange mit Warnkennzeichnung:** NICHT ORDNUNGSGEMÄSS / AUTOMATISCH ABGESCHLOSSEN
+- **Schwarz:** GESPERRT / WERKSTATT
+- **Grün:** FREI in der Fahrzeugübersicht
+
+Die Farben werden in Monatskalender und Tagesdetails aus demselben Fahrt-/Buchungsstatus abgeleitet. Dadurch muss z. B. eine rote Reservierung auch in den Tagesdetails mit roter Statuskante erscheinen.
+
+### Fahrzeugstatus
+- **FREI**, inklusive „Frei bis …“ zur nächsten verbindlichen Belegung.
+- **RESERVIERT**, solange die Reservierungszeit läuft und keine Fahrt gestartet wurde.
+- **IN NUTZUNG**, sobald eine Fahrt aktiv ist.
+- **ÜBERFÄLLIG**, wenn das Reservierungsende überschritten und die Fahrt weiterhin aktiv ist.
+- **GESPERRT / WERKSTATT** bei einer aktiven Sperre.
+- Wird eine Fahrt vor dem geplanten Reservierungsende ordnungsgemäß beendet, steht der Bus ab dem tatsächlichen Fahrtende wieder zur Verfügung.
+
+### Kalender und Legende
+- Kalender verwendet ausschließlich die Monatsansicht.
+- Ausführlicher Legenden-Button erklärt Farben, 24-Stunden-Startfenster, grünen/orangen Startbutton, Start-/Endeberechtigungen und automatischen Abschluss.
+- In der sichtbaren App-Legende wird für Master und normale Admins einheitlich der Begriff **Admin** verwendet; die technische README dokumentiert Master separat.
+
+### TÜV
+- TÜV wird als Monat/Jahr dargestellt, z. B. **02 / 2027**.
+- Der TÜV gilt bis zum letzten Kalendertag des angegebenen Monats.
+
 
 Vollständiger Stand nach dem bewährten Trainingsplaner-Aufbau.
 
@@ -162,13 +212,3 @@ Auf Basis der vom Nutzer bereitgestellten v1.3.2. Nur TÜV, Werkstatt Von und Bi
 - Sobald Anfragensteller oder Fahrer beendet, verschwindet „Fahrt beenden“ bei beiden durch Echtzeit-Aktualisierung.
 - TÜV-Anzeige und Eingabe auf Monat/Jahr umgestellt, z. B. 02 / 2027.
 - TÜV gilt intern bis zum letzten Kalendertag des eingetragenen Monats.
-
-
-################## v1.8.5
-- Kalender unterscheidet aktive Reservierungen, offene Anfragen, überfällige Fahrten, normale vergangene Einträge und automatisch abgeschlossene Fahrten.
-- Vergangene ordentliche oder nie gestartete Reservierungen erscheinen grau.
-- Überfällige aktive Fahrten erscheinen orange.
-- Automatisch abgeschlossene Fahrten erscheinen grau-orange mit Warnsymbol.
-- Tagesdetails zeigen bei automatischem Abschluss Anfragensteller, eingetragenen Fahrer, Abschlusszeit, automatisch übernommene KM und auslösende Person.
-- Verantwortliche Personen werden beim automatischen Abschluss als unveränderlicher Snapshot im Fahrteintrag gespeichert.
-- 24-Stunden-Startlogik für Master, Admin, Anfragensteller und Fahrer enthalten.

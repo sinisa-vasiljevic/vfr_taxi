@@ -1,4 +1,4 @@
-# VfR Taxi PWA v1.9.0
+# VfR Taxi PWA v1.9.1
 
 Vollständiger, konsolidierter Projektstand der VfR-Taxi-PWA.
 
@@ -13,7 +13,7 @@ Vollständiger, konsolidierter Projektstand der VfR-Taxi-PWA.
 - Erst die Zuweisung erzeugt eine verbindliche Reservierung.
 - Reservierte oder gesperrte Busse können für kollidierende Zeiträume nicht zugewiesen werden.
 - Der Anfragensteller bleibt unveränderbar; der Fahrer einer eigenen offenen Anfrage darf geändert werden.
-- Ein Nutzer darf die eigene offene Anfrage oder die eigene bestätigte Reservierung löschen. Nach Löschen der Reservierung ist der Bus in diesem Zeitraum wieder frei.
+- Ein Nutzer darf die eigene offene Anfrage und die eigene bestätigte Reservierung nur löschen, solange diese Reservierung noch nie als Fahrt gestartet wurde. Sobald die Fahrt einmal gestartet wurde, ist eine Löschung durch den Nutzer dauerhaft ausgeschlossen, auch nach regulärem oder automatischem Fahrtabschluss. Wird eine noch nicht gestartete Reservierung gelöscht, ist der Bus in diesem Zeitraum wieder frei.
 
 ## Fahrtstart und Fahrtende
 - Start frühestens 24 Stunden vor dem Reservierungsbeginn und nur bis zum Reservierungsende, wenn die Fahrt noch nicht gestartet wurde.

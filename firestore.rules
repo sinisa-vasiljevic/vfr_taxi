@@ -37,7 +37,7 @@ service cloud.firestore {
         || (hasActiveProfile() && resource.data.status == "reserved" && request.resource.data.status == resource.data.status && request.resource.data.trainerUid == resource.data.trainerUid && request.resource.data.driverUid == resource.data.driverUid && (resource.data.trainerUid == request.auth.uid || resource.data.driverUid == request.auth.uid) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["tripStatus","tripId","tripStartedAt","tripEndedAt"]))
         || (hasActiveProfile() && resource.data.status == "reserved" && request.resource.data.status == resource.data.status && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["tripStatus","tripEndedAt"]) && request.resource.data.tripStatus == "auto-closed");
       // Eigene Anfrage oder eigene bestätigte Reservierung darf entfernt werden. Danach blockiert der Datensatz den Bus nicht mehr.
-      allow delete: if isAdmin() || (hasActiveProfile() && resource.data.trainerUid == request.auth.uid && resource.data.status in ["requested","reserved"] && (!("tripStatus" in resource.data) || resource.data.tripStatus != "active"));
+      allow delete: if isAdmin() || (hasActiveProfile() && resource.data.trainerUid == request.auth.uid && (resource.data.status == "requested" || (resource.data.status == "reserved" && !("tripStatus" in resource.data))));
     }
 
     match /trips/{tripId} {

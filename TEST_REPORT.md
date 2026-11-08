@@ -1,4 +1,4 @@
-# Prüfbericht VfR Taxi v1.9.0
+# Prüfbericht VfR Taxi v1.9.1
 
 ## Umfang
 Geprüft wurden `app.js`, `index.html`, `styles.css`, `config.js`, `sw.js`, `firebase.json`, `firestore.rules`, `manifest.webmanifest`, README und alle Icons.
@@ -16,7 +16,7 @@ Geprüft wurden `app.js`, `index.html`, `styles.css`, `config.js`, `sw.js`, `fir
 - einheitliche Statusfarben in Monatskalender, Tagesdetails, Fahrzeugstatus und Legende
 - Entfernung der alten Wochenansicht
 - Verhinderung von doppelten generischen Fahrteinträgen aus dem Fahrzeugformular
-- Eigene bestätigte Reservierung löschbar, sofern keine aktive Fahrt läuft
+- Eigene bestätigte Reservierung durch Nutzer nur löschbar, solange die Fahrt noch nie gestartet wurde
 - Nach Löschung blockiert der Buchungsdatensatz den Bus nicht mehr
 
 ## Geprüfte Statusabläufe
@@ -24,7 +24,7 @@ Geprüft wurden `app.js`, `index.html`, `styles.css`, `config.js`, `sw.js`, `fir
 2. IN NUTZUNG → ÜBERFÄLLIG → regulär beendet
 3. ÜBERFÄLLIG → Start der nächsten Fahrt → automatisch abgeschlossen
 4. Reservierung vor Start gelöscht → Bus wieder frei
-5. Aktive Fahrt → Reservierungslöschung gesperrt, zuerst Fahrt beenden
+5. Einmal gestartete Fahrt → Reservierungslöschung für Nutzer dauerhaft gesperrt, auch nach Fahrtende
 6. Frühzeitiger regulärer Fahrtabschluss → Bus sofort frei
 7. Nie gestartete Reservierung nach Endzeit → kein Startbutton
 8. Start frühestens 24 Stunden vor Beginn

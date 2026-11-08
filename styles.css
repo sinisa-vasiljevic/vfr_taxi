@@ -89,7 +89,11 @@ nav button{min-width:0;width:100%;padding:0 4px;font-size:clamp(12px,3.35vw,15px
 .requestForm .personBlock>label:nth-child(2),.requestEditForm .personBlock>label:nth-child(2){color:#d71920!important}
 .requestForm .personBlock>label:nth-child(2) select,.requestEditForm .personBlock>label:nth-child(2) select{color:#111!important}
 
-/* v1.8.4: 24-Stunden-Startfenster */
-.personalRideInfo.rideStillActive{border-color:#ef7d00;background:#fff0db}
-.personalRideInfo.rideStillActive small{display:block;margin:6px 0;color:#8a3c00;font-weight:800;line-height:1.3}
-.startRideBtn.startRideWarning{background:#ef7d00!important;color:#fff!important;border-color:#c65d00!important}
+/* v1.8.5: Kalender-Historie */
+.monthEvent.past,.event.past{background:#9aa0a6!important;color:#fff!important;border-color:#858b91!important}
+.monthEvent.overdue,.event.overdue{background:#ef7d00!important;color:#fff!important;border-color:#c85f00!important}
+.monthEvent.autoClosed,.event.autoClosed{background:linear-gradient(135deg,#9aa0a6 0 68%,#ef7d00 68% 100%)!important;color:#fff!important;border-color:#c56a00!important}
+.monthEvent.autoClosed::before,.event.autoClosed::before{content:'⚠ ';font-weight:900}
+.calendarDetailItem.past{background:#f1f3f4}.calendarDetailItem.overdue{background:#fff0db}.calendarDetailItem.autoClosed{background:#fff3e4}
+.autoClosedDetails{margin-top:10px;padding:10px;border:2px solid #ef7d00;border-radius:10px;background:#fff7ec;color:#4b2600;line-height:1.45}
+.personalRideInfo.rideStillActive{border-color:#ef7d00;background:#fff0db}.personalRideInfo.rideStillActive small{display:block;margin:6px 0;color:#8a3c00;font-weight:800;line-height:1.3}.startRideBtn.startRideWarning{background:#ef7d00!important;color:#fff!important;border-color:#c65d00!important}

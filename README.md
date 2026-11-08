@@ -1,4 +1,4 @@
-# VfR Taxi PWA v1.9.2
+# VfR Taxi PWA v1.9.3
 
 Vollständiger, konsolidierter Projektstand der VfR-Taxi-PWA.
 
@@ -57,8 +57,15 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 3. Nach Aktualisierung die installierte PWA einmal vollständig schließen und neu öffnen.
 
 
-### Kilometerlogik v1.9.2
+### Kilometerlogik v1.9.3
 - Harte Untergrenze beim Fahrtstart ist der Start-KM der zuletzt gestarteten Fahrt desselben Busses.
 - Ein möglicherweise falsch zu hoch eingetragener letzter End-KM blockiert die nächste Fahrt nicht.
 - Liegt der neue Start-KM unter dem letzten End-KM, aber nicht unter dem letzten Start-KM, erscheint eine Warnung mit bewusster Bestätigung.
 - Die bestätigte Korrektur wird im neuen Fahrteintrag mit vorherigem Start-KM, vorherigem End-KM, neuem Tachostand, Benutzer und Zeitstempel dokumentiert.
+
+
+### Benutzerverwaltung v1.9.3
+- Mobile Benutzerkarten deutlich kompakter.
+- Name und E-Mail/Rolle nutzen die volle Kartenbreite.
+- Aktionen Admin/Entfernen, Sperren/Entsperren und Löschen stehen in einer kompakten Dreierreihe.
+- Kein zusätzlicher Seitenabstand für den schwebenden „+ Bus anfragen“-Button hinzugefügt.

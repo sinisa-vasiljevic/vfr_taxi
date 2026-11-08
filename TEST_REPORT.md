@@ -1,4 +1,4 @@
-# Prüfbericht VfR Taxi v1.9.2
+# Prüfbericht VfR Taxi v1.9.3
 
 ## Umfang
 Geprüft wurden `app.js`, `index.html`, `styles.css`, `config.js`, `sw.js`, `firebase.json`, `firestore.rules`, `manifest.webmanifest`, README und alle Icons.
@@ -34,3 +34,5 @@ Eine echte Ende-zu-Ende-Prüfung gegen das produktive Firebase-Projekt und reale
 
 - KM-Prüfung: Start-KM unter dem Start-KM der zuletzt gestarteten Fahrt wird gesperrt.
 - KM-Korrektur: Wert unter dem letzten End-KM, aber nicht unter dem letzten Start-KM, ist nur nach Bestätigung zulässig und wird dokumentiert.
+
+- Benutzerverwaltung: kompakte Karten und dreispaltige mobile Aktionszeile geprüft.

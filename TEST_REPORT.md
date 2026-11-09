@@ -1,4 +1,4 @@
-# Prüfbericht VfR Taxi v1.9.5
+# Prüfbericht VfR Taxi v1.9.6
 
 ## Umfang
 Geprüft wurden `app.js`, `index.html`, `styles.css`, `config.js`, `sw.js`, `firebase.json`, `firestore.rules`, `manifest.webmanifest`, README und alle Icons.
@@ -38,7 +38,7 @@ Eine echte Ende-zu-Ende-Prüfung gegen das produktive Firebase-Projekt und reale
 - Benutzerverwaltung: kompakte Karten und dreispaltige mobile Aktionszeile geprüft.
 
 
-### Ergänzende Prüfungen v1.9.5
+### Ergänzende Prüfungen v1.9.6
 - Pflichtauswahl für Mannschaft und Spielart in neuer und bearbeiteter Anfrage.
 - U18 ist nicht in der Mannschaftsauswahl enthalten.
 - Spielart und Ort/Ziel werden in den entscheidungsrelevanten Übersichten angezeigt.
@@ -46,7 +46,7 @@ Eine echte Ende-zu-Ende-Prüfung gegen das produktive Firebase-Projekt und reale
 - Offene Anfrage zurückziehen löscht weiterhin ausschließlich den Anfrage-Datensatz.
 
 
-### Ergänzende Prüfungen v1.9.5
+### Ergänzende Prüfungen v1.9.6
 - Pflichtauswahl für Mannschaft und Spielart in neuer und bearbeiteter Anfrage.
 - U18 ist nicht in der Mannschaftsauswahl enthalten.
 - Spielart und Ort/Ziel werden in den entscheidungsrelevanten Übersichten angezeigt.
@@ -54,6 +54,14 @@ Eine echte Ende-zu-Ende-Prüfung gegen das produktive Firebase-Projekt und reale
 - Offene Anfrage zurückziehen löscht weiterhin ausschließlich den Anfrage-Datensatz.
 
 
-#### Layoutpruefung v1.9.5
+#### Layoutpruefung v1.9.6
 - Dieselbe requestPriorityPair-Struktur wird fuer alle Rollen verwendet.
 - Finale CSS-Regel erzwingt auch unter 430 px zwei gleich breite Spalten.
+
+
+##### Ergänzende Prüfungen v1.9.6
+- Identische Standortauswahl in Fahrtende und Fahrzeugdokumentation geprüft.
+- Freie Standortdefinition wird nur bei „Anderer Standort / freie Eingabe“ eingeblendet und ist dann Pflicht.
+- Schaden Nein blendet Beschreibung aus; Schaden Ja blendet sie ein und verlangt Text.
+- Schadensmeldung schreibt weiterhin `damageText`, `damages` und `openDamage`; keine automatische Sperre.
+- Bestehende Rollenprüfung für Fahrtende bleibt für Master, Admin, Anfragensteller und Fahrer unverändert.

@@ -1,4 +1,4 @@
-# VfR Taxi PWA v1.9.5
+# VfR Taxi PWA v1.9.6
 
 Vollständiger, konsolidierter Projektstand der VfR-Taxi-PWA.
 
@@ -57,21 +57,21 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 3. Nach Aktualisierung die installierte PWA einmal vollständig schließen und neu öffnen.
 
 
-### Kilometerlogik v1.9.5
+### Kilometerlogik v1.9.6
 - Harte Untergrenze beim Fahrtstart ist der Start-KM der zuletzt gestarteten Fahrt desselben Busses.
 - Ein möglicherweise falsch zu hoch eingetragener letzter End-KM blockiert die nächste Fahrt nicht.
 - Liegt der neue Start-KM unter dem letzten End-KM, aber nicht unter dem letzten Start-KM, erscheint eine Warnung mit bewusster Bestätigung.
 - Die bestätigte Korrektur wird im neuen Fahrteintrag mit vorherigem Start-KM, vorherigem End-KM, neuem Tachostand, Benutzer und Zeitstempel dokumentiert.
 
 
-### Benutzerverwaltung v1.9.5
+### Benutzerverwaltung v1.9.6
 - Mobile Benutzerkarten deutlich kompakter.
 - Name und E-Mail/Rolle nutzen die volle Kartenbreite.
 - Aktionen Admin/Entfernen, Sperren/Entsperren und Löschen stehen in einer kompakten Dreierreihe.
 - Kein zusätzlicher Seitenabstand für den schwebenden „+ Bus anfragen“-Button hinzugefügt.
 
 
-#### Anfragepriorisierung v1.9.5
+#### Anfragepriorisierung v1.9.6
 - Mannschaft ist ein Pflicht-Auswahlfeld: PT18, PT17, U11 bis U17, U19 und HERREN. U18 ist bewusst nicht enthalten.
 - Spielart ist ein Pflicht-Auswahlfeld: LIGA, Testspiel, TR-Lager, Pokal, Turnier und Event.
 - Mannschaft und Spielart stehen im Anfragefenster platzsparend nebeneinander.
@@ -80,7 +80,7 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 - Nur „Anfrage zurückziehen“ löscht eine offene Anfrage vollständig.
 
 
-#### Anfragepriorisierung v1.9.5
+#### Anfragepriorisierung v1.9.6
 - Mannschaft ist ein Pflicht-Auswahlfeld: PT18, PT17, U11 bis U17, U19 und HERREN. U18 ist bewusst nicht enthalten.
 - Spielart ist ein Pflicht-Auswahlfeld: LIGA, Testspiel, TR-Lager, Pokal, Turnier und Event.
 - Mannschaft und Spielart stehen im Anfragefenster platzsparend nebeneinander.
@@ -89,5 +89,12 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 - Nur „Anfrage zurückziehen“ löscht eine offene Anfrage vollständig.
 
 
-#### Layoutkorrektur v1.9.5
+#### Layoutkorrektur v1.9.6
 - Mannschaft und Spielart werden im Anfrageformular fuer alle Rollen und auch mobil zwingend zweispaltig nebeneinander dargestellt.
+
+
+##### Rückgabe und Schäden v1.9.6
+- Parkplatz/Standort ist in Fahrtende und administrativer Fahrzeugdokumentation identisch auswählbar: Badstraße, Theresienstr., DLRG, im Gelände, Werkstatt oder freie Eingabe.
+- Schaden/Mangel wird über Nein/Ja ausdrücklich gewählt. Bei Ja ist eine Beschreibung Pflicht.
+- Eine Schadensmeldung erzeugt einen offenen Eintrag in `damages` und erhöht `openDamage` am Fahrzeug. Eine automatische Werkstattsperre erfolgt nicht.
+- Die Fahrt-beenden-Funktion gilt unverändert für Master, Admin, Anfragensteller und eingetragenen Fahrer.

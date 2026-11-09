@@ -1,4 +1,4 @@
-# VfR Taxi PWA v1.9.3
+# VfR Taxi PWA v1.9.4
 
 Vollständiger, konsolidierter Projektstand der VfR-Taxi-PWA.
 
@@ -57,15 +57,33 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 3. Nach Aktualisierung die installierte PWA einmal vollständig schließen und neu öffnen.
 
 
-### Kilometerlogik v1.9.3
+### Kilometerlogik v1.9.4
 - Harte Untergrenze beim Fahrtstart ist der Start-KM der zuletzt gestarteten Fahrt desselben Busses.
 - Ein möglicherweise falsch zu hoch eingetragener letzter End-KM blockiert die nächste Fahrt nicht.
 - Liegt der neue Start-KM unter dem letzten End-KM, aber nicht unter dem letzten Start-KM, erscheint eine Warnung mit bewusster Bestätigung.
 - Die bestätigte Korrektur wird im neuen Fahrteintrag mit vorherigem Start-KM, vorherigem End-KM, neuem Tachostand, Benutzer und Zeitstempel dokumentiert.
 
 
-### Benutzerverwaltung v1.9.3
+### Benutzerverwaltung v1.9.4
 - Mobile Benutzerkarten deutlich kompakter.
 - Name und E-Mail/Rolle nutzen die volle Kartenbreite.
 - Aktionen Admin/Entfernen, Sperren/Entsperren und Löschen stehen in einer kompakten Dreierreihe.
 - Kein zusätzlicher Seitenabstand für den schwebenden „+ Bus anfragen“-Button hinzugefügt.
+
+
+#### Anfragepriorisierung v1.9.4
+- Mannschaft ist ein Pflicht-Auswahlfeld: PT18, PT17, U11 bis U17, U19 und HERREN. U18 ist bewusst nicht enthalten.
+- Spielart ist ein Pflicht-Auswahlfeld: LIGA, Testspiel, TR-Lager, Pokal, Turnier und Event.
+- Mannschaft und Spielart stehen im Anfragefenster platzsparend nebeneinander.
+- Spielart und Ort/Ziel werden in der Anfrageübersicht, den Kalender-Tagesdetails, der WhatsApp-Admin-Nachricht und beim nächsten Fahrzeugtermin angezeigt.
+- „Reservierung aufheben“ löscht die Anfrage nicht mehr. Der Status wird auf ANGEFRAGT zurückgesetzt, die Buszuweisung entfernt und der Bus freigegeben.
+- Nur „Anfrage zurückziehen“ löscht eine offene Anfrage vollständig.
+
+
+#### Anfragepriorisierung v1.9.4
+- Mannschaft ist ein Pflicht-Auswahlfeld: PT18, PT17, U11 bis U17, U19 und HERREN. U18 ist bewusst nicht enthalten.
+- Spielart ist ein Pflicht-Auswahlfeld: LIGA, Testspiel, TR-Lager, Pokal, Turnier und Event.
+- Mannschaft und Spielart stehen im Anfragefenster platzsparend nebeneinander.
+- Spielart und Ort/Ziel werden in der Anfrageübersicht, den Kalender-Tagesdetails, der WhatsApp-Admin-Nachricht und beim nächsten Fahrzeugtermin angezeigt.
+- „Reservierung aufheben“ löscht die Anfrage nicht mehr. Der Status wird auf ANGEFRAGT zurückgesetzt, die Buszuweisung entfernt und der Bus freigegeben.
+- Nur „Anfrage zurückziehen“ löscht eine offene Anfrage vollständig.

@@ -1,4 +1,4 @@
-# Prüfbericht VfR Taxi v1.9.4
+# Prüfbericht VfR Taxi v1.9.5
 
 ## Umfang
 Geprüft wurden `app.js`, `index.html`, `styles.css`, `config.js`, `sw.js`, `firebase.json`, `firestore.rules`, `manifest.webmanifest`, README und alle Icons.
@@ -38,7 +38,7 @@ Eine echte Ende-zu-Ende-Prüfung gegen das produktive Firebase-Projekt und reale
 - Benutzerverwaltung: kompakte Karten und dreispaltige mobile Aktionszeile geprüft.
 
 
-### Ergänzende Prüfungen v1.9.4
+### Ergänzende Prüfungen v1.9.5
 - Pflichtauswahl für Mannschaft und Spielart in neuer und bearbeiteter Anfrage.
 - U18 ist nicht in der Mannschaftsauswahl enthalten.
 - Spielart und Ort/Ziel werden in den entscheidungsrelevanten Übersichten angezeigt.
@@ -46,9 +46,14 @@ Eine echte Ende-zu-Ende-Prüfung gegen das produktive Firebase-Projekt und reale
 - Offene Anfrage zurückziehen löscht weiterhin ausschließlich den Anfrage-Datensatz.
 
 
-### Ergänzende Prüfungen v1.9.4
+### Ergänzende Prüfungen v1.9.5
 - Pflichtauswahl für Mannschaft und Spielart in neuer und bearbeiteter Anfrage.
 - U18 ist nicht in der Mannschaftsauswahl enthalten.
 - Spielart und Ort/Ziel werden in den entscheidungsrelevanten Übersichten angezeigt.
 - Reservierung aufheben führt `reserved -> requested` aus, entfernt `vehicleId` und behält den Buchungsdatensatz.
 - Offene Anfrage zurückziehen löscht weiterhin ausschließlich den Anfrage-Datensatz.
+
+
+#### Layoutpruefung v1.9.5
+- Dieselbe requestPriorityPair-Struktur wird fuer alle Rollen verwendet.
+- Finale CSS-Regel erzwingt auch unter 430 px zwei gleich breite Spalten.

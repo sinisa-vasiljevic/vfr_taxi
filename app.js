@@ -1,4 +1,4 @@
-import{firebaseConfig,MASTER_EMAIL,BUILD_VERSION,WHATSAPP_ADMIN_NUMBER}from'./config.js?v=1.9.4';
+import{firebaseConfig,MASTER_EMAIL,BUILD_VERSION,WHATSAPP_ADMIN_NUMBER}from'./config.js?v=1.9.5';
 import{initializeApp}from'https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js';
 import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,updateProfile,deleteUser}from'https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js';
 import{getFirestore,doc,getDoc,setDoc,addDoc,updateDoc,deleteDoc,collection,onSnapshot,query,orderBy,serverTimestamp,writeBatch,enableMultiTabIndexedDbPersistence}from'https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js';

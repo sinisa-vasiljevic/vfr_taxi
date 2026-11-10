@@ -126,3 +126,15 @@ nav button{min-width:0;width:100%;padding:0 4px;font-size:clamp(12px,3.35vw,15px
 
 /* v1.9.6 Standortauswahl und eindeutige Schadensmeldung */
 .customLocationLabel{margin-top:6px}.damageChoice{margin:14px 0 8px}.damageChoice>span{display:block;text-align:left;font-size:12px;font-weight:900;text-transform:uppercase;margin-bottom:6px}.damageButtons{display:grid;grid-template-columns:1fr 1fr;gap:8px}.damageChoiceBtn{height:44px;border:1px solid #aaa;border-radius:10px;background:#eee;font-weight:900}.damageChoiceBtn.active[data-damage-choice="no"]{background:var(--g);color:#fff;border-color:#087433}.damageChoiceBtn.active[data-damage-choice="yes"]{background:var(--r);color:#fff;border-color:#a00000}.damageTextLabel textarea{min-height:100px}
+
+/* v1.9.7 Hauptnavigation */
+.stats .stat{appearance:none;border:4px solid transparent;text-align:left;color:#111;width:100%;font:inherit;transition:border-color .15s,box-shadow .15s,transform .08s}
+.stats .stat:active{transform:scale(.985)}
+.stats .stat.active{border-color:var(--r);box-shadow:0 0 0 2px rgba(215,25,32,.16),0 4px 12px #0002}
+.stats .stat:focus-visible{outline:3px solid #1677d2;outline-offset:2px}
+#usersNav{display:block;margin:14px 0;background:#fff;padding:5px;border-radius:13px}
+#usersNav[hidden]{display:none!important}
+#usersNav button{width:100%;height:44px;border:0;border-radius:10px;font-weight:900;background:#e1e2e5;color:#1768d4}
+#usersNav.active button{background:#111;color:#fff}
+.damageOverviewItem{border-left-color:var(--r)}
+@media(max-width:700px){.stats .stat{height:112px;padding:12px}.stats .stat small{font-size:clamp(14px,4.2vw,18px);line-height:1.1}.stats .stat b{font-size:32px}}

@@ -65,3 +65,6 @@ Eine echte Ende-zu-Ende-Prüfung gegen das produktive Firebase-Projekt und reale
 - Schaden Nein blendet Beschreibung aus; Schaden Ja blendet sie ein und verlangt Text.
 - Schadensmeldung schreibt weiterhin `damageText`, `damages` und `openDamage`; keine automatische Sperre.
 - Bestehende Rollenprüfung für Fahrtende bleibt für Master, Admin, Anfragensteller und Fahrer unverändert.
+
+## Vollprüfung v1.9.7
+Navigationsumbau, Master-only-Benutzeransicht, Syntax, JSON, Dateiverweise, Versionskonsistenz und ZIP-Integrität geprüft. Echte produktive Firebase-Ende-zu-Ende-Tests bleiben als Testgrenze bestehen.

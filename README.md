@@ -98,3 +98,15 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 - Schaden/Mangel wird über Nein/Ja ausdrücklich gewählt. Bei Ja ist eine Beschreibung Pflicht.
 - Eine Schadensmeldung erzeugt einen offenen Eintrag in `damages` und erhöht `openDamage` am Fahrzeug. Eine automatische Werkstattsperre erfolgt nicht.
 - Die Fahrt-beenden-Funktion gilt unverändert für Master, Admin, Anfragensteller und eingetragenen Fahrer.
+
+
+### Bedienverbesserungen v1.9.9
+- Offene Anfragen können aus Monatskalender und Tagesdetails direkt geöffnet werden.
+- Die zugehörige Anfrage wird automatisch zentriert und kurz hervorgehoben.
+- Nach erfolgreicher Buszuweisung blockiert ein Bestätigungsdialog weitere Eingaben, bis OK gedrückt wird.
+
+
+### Sicherheitskorrektur v1.9.9
+- Die Buszuweisung läuft atomar in einer Firestore-Transaktion.
+- Während der gesamten Prüfung und Speicherung blockiert ein modales Fortschrittsfenster weitere Eingaben.
+- Parallele Zuweisungen werden anhand des aktuellen Serverstands erneut geprüft.

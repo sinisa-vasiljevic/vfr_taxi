@@ -66,5 +66,21 @@ Eine echte Ende-zu-Ende-Prüfung gegen das produktive Firebase-Projekt und reale
 - Schadensmeldung schreibt weiterhin `damageText`, `damages` und `openDamage`; keine automatische Sperre.
 - Bestehende Rollenprüfung für Fahrtende bleibt für Master, Admin, Anfragensteller und Fahrer unverändert.
 
-## Vollprüfung v1.9.7
+## Vollprüfung v1.9.9
 Navigationsumbau, Master-only-Benutzeransicht, Syntax, JSON, Dateiverweise, Versionskonsistenz und ZIP-Integrität geprüft. Echte produktive Firebase-Ende-zu-Ende-Tests bleiben als Testgrenze bestehen.
+
+
+### Ergänzende Prüfungen v1.9.9
+- Kalender-Direktsprung nutzt die eindeutige bookingId und öffnet nur weiterhin offene Anfragen.
+- Monatsbalken und Tagesdetailkarten unterstützen den Direktsprung.
+- Aktionsbuttons in Tagesdetails lösen den Direktsprung nicht versehentlich aus.
+- Während der Buszuweisung werden Zuweisungsbuttons deaktiviert.
+- Nach erfolgreicher Firestore-Aktualisierung erscheint ein modaler Bestätigungsdialog mit Bus, Mannschaft, Zeitraum, Anfragensteller und Ziel.
+- Bei Fehlern werden die Buttons wieder aktiviert und eine Fehlermeldung angezeigt.
+
+
+### Vollprüfung und Korrektur v1.9.9
+- Fehlendes Manifest im vorherigen ZIP ergänzt.
+- Race Condition bei paralleler Buszuweisung durch Firestore-Transaktion reduziert.
+- Zuweisungsdialog blockiert während Prüfung und Speicherung vollständig.
+- Syntax, JSON, lokale Dateiverweise, Rollenpfade, Konfliktlogik und ZIP-Integrität geprüft.

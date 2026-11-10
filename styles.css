@@ -138,3 +138,14 @@ nav button{min-width:0;width:100%;padding:0 4px;font-size:clamp(12px,3.35vw,15px
 #usersNav.active button{background:#111;color:#fff}
 .damageOverviewItem{border-left-color:var(--r)}
 @media(max-width:700px){.stats .stat{height:112px;padding:12px}.stats .stat small{font-size:clamp(14px,4.2vw,18px);line-height:1.1}.stats .stat b{font-size:32px}}
+
+/* v1.9.8 Kalender-Direktsprung und sichere Zuweisungsbestaetigung */
+.calendarRequestLink{cursor:pointer}
+.calendarRequestLink:hover,.calendarRequestLink:focus-within{box-shadow:0 0 0 3px rgba(245,200,66,.45),0 2px 8px #0002}
+.requestTargetHighlight{animation:requestTargetPulse 2.4s ease-out;border-color:var(--status-requested)!important;box-shadow:0 0 0 5px rgba(245,200,66,.7),0 8px 24px #0003!important}
+@keyframes requestTargetPulse{0%,35%{transform:scale(1.015);background:#fff6c8}100%{transform:scale(1);background:#fff}}
+.assignmentSuccess .assignmentSummary{margin:14px 0 18px;padding:13px;border-radius:12px;background:#f3f4f5;line-height:1.55;text-align:left}
+.assignmentSuccess #assignmentSuccessClose{margin-top:4px}
+
+/* v1.9.9 atomare und blockierende Buszuweisung */
+.assignmentSaving{text-align:center;padding:22px 8px}.assignmentSpinner{width:52px;height:52px;margin:0 auto 16px;border:6px solid #ddd;border-top-color:var(--status-reserved);border-radius:50%;animation:assignmentSpin .8s linear infinite}@keyframes assignmentSpin{to{transform:rotate(360deg)}}

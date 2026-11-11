@@ -120,3 +120,11 @@ Navigationsumbau, Master-only-Benutzeransicht, Syntax, JSON, Dateiverweise, Vers
 - pageshow, visibilitychange und focus lösen dieselbe gedrosselte Vordergrundprüfung aus.
 - Bei Versionsabweichung bleibt die Oberfläche gesperrt, bis der Benutzer das Pflichtupdate ausführt.
 - Update-Lifecycle enthält weiterhin keine Firestore-Schreiboperation.
+
+
+### Korrekturprüfung v2.1.4
+- Login bleibt bis zur abgeschlossenen Firebase-Authentifizierungsprüfung verborgen.
+- Authentifizierungsstart nutzt onAuthStateChanged und auth.authStateReady() mit Schutz gegen doppelte Verarbeitung.
+- Service-Worker-Neustart erfolgt zeitverzögert und mit cachefreier Start-URL.
+- Updatepfad enthält keine Firestore-Schreiboperation.
+- Fahrt-, Reservierungs-, Werkstatt- und Rollenlogik blieb unverändert.

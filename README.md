@@ -140,3 +140,11 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 - Weicht die veröffentlichte Version von BUILD_VERSION ab, erscheint vor jeder weiteren Bedienung der Pflichtdialog.
 - Firebase-Hosting-Header verhindern das Zwischenspeichern von version.json und sw.js.
 - Aktive Fahrten und andere Firestore-Daten werden durch die Prüfung weiterhin nicht verändert.
+
+
+##### Version 2.1.4
+- Behebt den iOS-Fehler, bei dem die App nach einem Pflichtupdate im Anmeldefenster stehen blieb.
+- Das Anmeldefenster bleibt verborgen, bis Firebase Auth den gespeicherten Zustand eindeutig wiederhergestellt hat.
+- onAuthStateChanged und authStateReady bilden zwei abgesicherte Wiederherstellungswege.
+- Nach dem Service-Worker-Wechsel erfolgt der Neustart nach 700 ms über eine cachefreie Start-URL.
+- Aktive Fahrten werden nicht verändert und nach der Anmeldung wieder aus Firestore eingelesen.

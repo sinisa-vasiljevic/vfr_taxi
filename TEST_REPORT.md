@@ -112,3 +112,11 @@ Navigationsumbau, Master-only-Benutzeransicht, Syntax, JSON, Dateiverweise, Vers
 - controllerchange lädt genau einmal neu.
 - Updatecode enthält keine Schreiboperation für bookings, trips, vehicles, users, invites oder damages.
 - Bestehende Fahrtstart-, Fahrtende-, Kilometer-, Reservierungs- und Rollenlogik blieb unverändert.
+
+
+### Korrekturprüfung v2.1.3
+- Ursache v2.1.2: Die Erkennung stützte sich auf Service-Worker-reg.update() und visibilitychange/focus. Auf iOS-PWAs wird der Vordergrundwechsel bzw. die Worker-Aktualisierung nicht in jedem Fall rechtzeitig gemeldet.
+- version.json als unabhängiger, cachefreier Versionskanal ergänzt.
+- pageshow, visibilitychange und focus lösen dieselbe gedrosselte Vordergrundprüfung aus.
+- Bei Versionsabweichung bleibt die Oberfläche gesperrt, bis der Benutzer das Pflichtupdate ausführt.
+- Update-Lifecycle enthält weiterhin keine Firestore-Schreiboperation.

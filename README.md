@@ -132,3 +132,11 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 - Bei einer neuen Version erscheint ein nicht schließbarer Pflichtdialog. Erst „JETZT AKTUALISIEREN“ aktiviert die neue Version und lädt die App neu.
 - Der Updatevorgang verändert keine Firestore-Daten. Aktive Fahrten, Start-KM, Reservierungen und Fahrerzuordnungen bleiben erhalten und werden nach dem Neustart erneut aus Firestore geladen.
 - Ohne neue Version wird der Pflichtbereich geschlossen und anschließend der aktuelle Firestore-Serverstand geladen.
+
+
+##### Version 2.1.3
+- Korrektur der iPhone-Vordergrunderkennung: zusätzlich zu visibilitychange werden pageshow und focus ausgewertet.
+- Die Versionsfeststellung hängt nicht mehr allein vom Service-Worker-Update ab. version.json wird bei jeder Vordergrundprüfung mit Zeitstempel und no-store direkt vom Netz angefordert.
+- Weicht die veröffentlichte Version von BUILD_VERSION ab, erscheint vor jeder weiteren Bedienung der Pflichtdialog.
+- Firebase-Hosting-Header verhindern das Zwischenspeichern von version.json und sw.js.
+- Aktive Fahrten und andere Firestore-Daten werden durch die Prüfung weiterhin nicht verändert.

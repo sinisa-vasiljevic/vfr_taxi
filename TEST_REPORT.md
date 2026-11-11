@@ -84,3 +84,31 @@ Navigationsumbau, Master-only-Benutzeransicht, Syntax, JSON, Dateiverweise, Vers
 - Race Condition bei paralleler Buszuweisung durch Firestore-Transaktion reduziert.
 - Zuweisungsdialog blockiert während Prüfung und Speicherung vollständig.
 - Syntax, JSON, lokale Dateiverweise, Rollenpfade, Konfliktlogik und ZIP-Integrität geprüft.
+
+
+### Prüfung v2.1.1
+- JavaScript-Syntaxprüfung, Versionskonsistenz und Manifest-JSON geprüft.
+- Service-Worker-Aktivierung, automatische Neuladung bei Controllerwechsel und Updateprüfung bei Fokus/Sichtbarkeit statisch geprüft.
+- Direkte Serveraktualisierung aller sechs Firestore-Sammlungen bei Rückkehr in die App geprüft.
+- Werkstattdaten werden aus dem bestehenden Sperrdatensatz vorbefüllt; Speichern aktualisiert denselben Datensatz statt Duplikate anzulegen.
+- Vorzeitige Freigabe entfernt die Sperre und setzt den Standort auf „im Gelände“.
+- Kalender besitzt vier feste Fahrzeugspuren; offene Anfragen bleiben über einen Tageshinweis erreichbar.
+- Produktive Ende-zu-Ende-Prüfung gegen Firebase und iOS-PWA-Lifecycle bleibt technisch nur in der veröffentlichten App möglich.
+
+
+#### Nachprüfung v2.1.1
+- Vorzeitige Werkstattfreigabe ist jetzt atomar: Sperrdatensatz und Fahrzeugstandort werden gemeinsam geschrieben oder gemeinsam verworfen.
+- Vor der Freigabe muss ein tatsächlicher Standort ungleich „Werkstatt“ ausgewählt werden.
+- Werkstatt-Bis-Datum vor Von-Datum wird abgefangen.
+- Eine zukünftige Werkstattreservierung setzt den aktuellen Fahrzeugstandort nicht vorzeitig auf „Werkstatt“.
+- Mehrere zeitlich getrennte Buchungen desselben Busses am selben Tag werden in der festen Busspur mit +N gekennzeichnet und vollständig in den Tagesdetails angezeigt.
+
+
+### Prüfung v2.1.2
+- 60-Sekunden-Intervall entfernt und statisch ausgeschlossen.
+- Service Worker aktiviert eine neue Version nicht mehr selbstständig; die Aktivierung erfolgt ausschließlich über die Nachricht SKIP_WAITING vom Pflichtdialog.
+- Pflichtdialog besitzt weder Schließen-Schaltfläche noch Später-Option und blockiert die restliche Oberfläche.
+- Prüfung wird bei Start, visibilitychange auf visible und Fokus ausgelöst; parallele Prüfungen werden verhindert.
+- controllerchange lädt genau einmal neu.
+- Updatecode enthält keine Schreiboperation für bookings, trips, vehicles, users, invites oder damages.
+- Bestehende Fahrtstart-, Fahrtende-, Kilometer-, Reservierungs- und Rollenlogik blieb unverändert.

@@ -115,3 +115,20 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 - Benutzername und Handynummer können durch den Master bearbeitet werden.
 - Reservierungsdetails zeigen Anfragensteller und Fahrer getrennt an.
 - Nach erfolgreicher Buszuweisung kann der Anfragensteller bei hinterlegter Handynummer direkt per WhatsApp informiert werden.
+
+
+#### Version 2.1.1
+- Service Worker wird ohne Browser-Cache geprüft; aktive und im Hintergrund gehaltene App-Fenster laden beim Aktivieren des neuen Service Workers automatisch neu. Zusätzlich erfolgt die Updateprüfung alle 60 Sekunden sowie bei Rückkehr in die App.
+- Firestore-Daten werden bei Rückkehr/Fokus zusätzlich direkt vom Server geladen, damit bearbeitete Anfragen nicht als veralteter lokaler Stand sichtbar bleiben.
+- Werkstatt/Sperre zeigt Werkstatt statt Verein, vorhandene Von-/Bis-Daten und Grund werden beim erneuten Öffnen angezeigt und können geändert werden.
+- Eine aktive Werkstatt/Sperre kann über „Bus vorzeitig freigeben“ beendet werden.
+- Monatskalender verwendet vier feste Spuren: Bus 1, Bus 2, Bus 3 und Bus 4. Mehrtägige Belegungen wechseln innerhalb einer Kalenderwoche nicht mehr die Zeile.
+
+
+##### Version 2.1.2
+- Die 60-Sekunden-Prüfung wurde vollständig entfernt.
+- Eine Versionsprüfung erfolgt beim App-Start und sofort bei Rückkehr aus dem Hintergrund bzw. erneutem Fokus.
+- Während der Prüfung ist die App kurz blockiert, damit keine neue Eingabe begonnen werden kann.
+- Bei einer neuen Version erscheint ein nicht schließbarer Pflichtdialog. Erst „JETZT AKTUALISIEREN“ aktiviert die neue Version und lädt die App neu.
+- Der Updatevorgang verändert keine Firestore-Daten. Aktive Fahrten, Start-KM, Reservierungen und Fahrerzuordnungen bleiben erhalten und werden nach dem Neustart erneut aus Firestore geladen.
+- Ohne neue Version wird der Pflichtbereich geschlossen und anschließend der aktuelle Firestore-Serverstand geladen.

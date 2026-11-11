@@ -110,3 +110,8 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 - Die Buszuweisung läuft atomar in einer Firestore-Transaktion.
 - Während der gesamten Prüfung und Speicherung blockiert ein modales Fortschrittsfenster weitere Eingaben.
 - Parallele Zuweisungen werden anhand des aktuellen Serverstands erneut geprüft.
+
+### Version 2.0.1
+- Benutzername und Handynummer können durch den Master bearbeitet werden.
+- Reservierungsdetails zeigen Anfragensteller und Fahrer getrennt an.
+- Nach erfolgreicher Buszuweisung kann der Anfragensteller bei hinterlegter Handynummer direkt per WhatsApp informiert werden.

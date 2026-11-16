@@ -128,3 +128,12 @@ Navigationsumbau, Master-only-Benutzeransicht, Syntax, JSON, Dateiverweise, Vers
 - Service-Worker-Neustart erfolgt zeitverzögert und mit cachefreier Start-URL.
 - Updatepfad enthält keine Firestore-Schreiboperation.
 - Fahrt-, Reservierungs-, Werkstatt- und Rollenlogik blieb unverändert.
+
+
+#### Korrekturprüfung v2.1.5
+- Mehrtägige requested-Buchungen erzeugen pro Kalenderwoche zusammenhängende gelbe rangeStart/rangeMiddle/rangeEnd-Segmente statt täglicher Einzelhinweise.
+- Tagesdetails unterscheiden Ein-Tages- und Mehrtageszeiträume; Mehrtagesdaten zeigen das unveränderte date/from bis endDate/to.
+- Fahrzeugkarten filtern Schadensdetails ausschließlich auf damages mit status open und zeigen deren Beschreibung direkt am Fahrzeug.
+- Bestehende Buchungs-, Konflikt-, Fahrtstart-, Fahrtende-, Rollen- und Kilometerlogik blieb unverändert.
+- JavaScript-Syntax, JSON-Dateien, Versionskonsistenz und ZIP-Inhalt wurden geprüft.
+- Produktive Firebase-Ende-zu-Ende-Prüfung bleibt außerhalb der veröffentlichten App technisch nicht ausführbar.

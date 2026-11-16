@@ -148,3 +148,10 @@ Gleiche Bedeutung verwendet überall dieselbe Farbe:
 - onAuthStateChanged und authStateReady bilden zwei abgesicherte Wiederherstellungswege.
 - Nach dem Service-Worker-Wechsel erfolgt der Neustart nach 700 ms über eine cachefreie Start-URL.
 - Aktive Fahrten werden nicht verändert und nach der Anmeldung wieder aus Firestore eingelesen.
+
+
+###### Version 2.1.5
+- Mehrtägige offene Anfragen werden im Monatskalender als zusammenhängender gelber Zeitraum dargestellt und nicht mehr an jedem Kalendertag als neue Anfrage wiederholt.
+- Tagesdetails zeigen bei mehrtägigen Anfragen, Reservierungen und Sperren den vollständigen Originalzeitraum mit Start- und Enddatum sowie Uhrzeit.
+- Offene Schäden/Mängel werden zusätzlich direkt auf der jeweiligen Fahrzeugkarte mit Beschreibung angezeigt; die Historie bleibt unverändert erhalten.
+- Reservierungs-, Fahrt-, Rollen-, Kilometer-, Konflikt- und Firestore-Datenlogik wurden nicht verändert.
